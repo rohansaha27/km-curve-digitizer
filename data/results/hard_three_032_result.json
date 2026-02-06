@@ -1,0 +1,61 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.010734657844097098,
+      "rmse": 0.013557700972389595,
+      "max_error": 0.07999999999999985,
+      "iae": 0.01076120279327837,
+      "concordance_correlation": 0.9978395920799928,
+      "r_squared": 0.9957167044116625,
+      "accuracy_5pct": 0.995,
+      "accuracy_3pct": 0.995,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.27181033445031666,
+      "median_survival_relative_error": 0.026159748866410593,
+      "label": "High Risk"
+    },
+    {
+      "mae": 0.005579745431889977,
+      "rmse": 0.006794779435507681,
+      "max_error": 0.02990299029902954,
+      "iae": 0.0055916678506815485,
+      "concordance_correlation": 0.9997279036022435,
+      "r_squared": 0.9994562169856875,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.09014625829803435,
+      "median_survival_relative_error": 0.0029558478500458373,
+      "label": "Medium Risk"
+    },
+    {
+      "mae": 0.006698239213383561,
+      "rmse": 0.007886298653035922,
+      "max_error": 0.02985074626865669,
+      "iae": 0.006707723952453074,
+      "concordance_correlation": 0.9996411765031423,
+      "r_squared": 0.9992883002534242,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.21708388414086954,
+      "median_survival_relative_error": 0.007044580629655865,
+      "label": "Low Risk"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.007670880829790211,
+    "mean_rmse": 0.0094129263536444,
+    "mean_max_error": 0.04658457885589536,
+    "mean_iae": 0.007686864865470998,
+    "mean_concordance_correlation": 0.9990695573951262,
+    "mean_r_squared": 0.9981537405502582,
+    "mean_accuracy_5pct": 0.9983333333333334,
+    "mean_accuracy_3pct": 0.9983333333333334,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 3,
+    "n_curves_expected": 3
+  },
+  "name": "hard_three_032",
+  "timing": 0.07702183723449707
+}

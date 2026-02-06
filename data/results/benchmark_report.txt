@@ -1,0 +1,80 @@
+======================================================================
+KM CURVE DIGITIZATION BENCHMARK REPORT
+======================================================================
+
+OVERALL PERFORMANCE
+----------------------------------------
+  Total plots evaluated: 40
+  Mean MAE:             0.0085 (±0.0037)
+  Mean RMSE:            0.0107 (±0.0046)
+  Mean CCC:             0.9969 (±0.0055)
+  Mean R²:              0.9940 (±0.0109)
+  Accuracy (<3% err):   97.8%
+  Accuracy (<5% err):   99.6%
+  Accuracy (<10% err):  100.0%
+
+DIFFICULTY: EASY
+----------------------------------------
+  Plots: 8
+  Mean MAE:           0.0083 (±0.0030)
+  Accuracy (<5% err): 99.9%
+  Mean CCC:           0.9989
+
+DIFFICULTY: HARD
+----------------------------------------
+  Plots: 19
+  Mean MAE:           0.0100 (±0.0042)
+  Accuracy (<5% err): 99.3%
+  Mean CCC:           0.9946
+
+DIFFICULTY: MEDIUM
+----------------------------------------
+  Plots: 13
+  Mean MAE:           0.0064 (±0.0014)
+  Accuracy (<5% err): 100.0%
+  Mean CCC:           0.9992
+
+PER-PLOT DETAILS
+----------------------------------------------------------------------
+  easy_000                       | MAE=0.0051 | Acc@5%=100.0% | Curves: 1/1
+  easy_001                       | MAE=0.0133 | Acc@5%=100.0% | Curves: 1/1
+  easy_002                       | MAE=0.0051 | Acc@5%=100.0% | Curves: 1/1
+  easy_003                       | MAE=0.0074 | Acc@5%=100.0% | Curves: 1/1
+  easy_004                       | MAE=0.0076 | Acc@5%= 99.5% | Curves: 1/1
+  easy_005                       | MAE=0.0095 | Acc@5%= 99.5% | Curves: 1/1
+  easy_006                       | MAE=0.0056 | Acc@5%=100.0% | Curves: 1/1
+  easy_007                       | MAE=0.0126 | Acc@5%=100.0% | Curves: 1/1
+  medium_008                     | MAE=0.0085 | Acc@5%=100.0% | Curves: 2/2
+  medium_009                     | MAE=0.0063 | Acc@5%=100.0% | Curves: 2/2
+  medium_010                     | MAE=0.0087 | Acc@5%= 99.8% | Curves: 2/2
+  medium_011                     | MAE=0.0059 | Acc@5%=100.0% | Curves: 2/2
+  medium_012                     | MAE=0.0070 | Acc@5%=100.0% | Curves: 2/2
+  medium_013                     | MAE=0.0085 | Acc@5%=100.0% | Curves: 2/2
+  medium_014                     | MAE=0.0069 | Acc@5%=100.0% | Curves: 2/2
+  medium_015                     | MAE=0.0053 | Acc@5%= 99.8% | Curves: 2/2
+  medium_016                     | MAE=0.0047 | Acc@5%=100.0% | Curves: 2/2
+  medium_017                     | MAE=0.0052 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_018                 | MAE=0.0088 | Acc@5%= 99.8% | Curves: 2/2
+  hard_trunc_019                 | MAE=0.0110 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_020                 | MAE=0.0079 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_021                 | MAE=0.0207 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_022                 | MAE=0.0084 | Acc@5%= 99.5% | Curves: 2/2
+  hard_lowres_023                | MAE=0.0123 | Acc@5%= 97.8% | Curves: 2/2
+  hard_lowres_024                | MAE=0.0173 | Acc@5%= 97.5% | Curves: 2/2
+  hard_lowres_025                | MAE=0.0110 | Acc@5%= 98.0% | Curves: 2/2
+  hard_lowres_026                | MAE=0.0168 | Acc@5%= 97.0% | Curves: 2/2
+  hard_lowres_027                | MAE=0.0114 | Acc@5%= 99.2% | Curves: 2/2
+  hard_three_028                 | MAE=0.0081 | Acc@5%= 99.8% | Curves: 3/3
+  hard_three_029                 | MAE=0.0102 | Acc@5%= 99.7% | Curves: 3/3
+  hard_three_030                 | MAE=0.0058 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_031                 | MAE=0.0108 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_032                 | MAE=0.0077 | Acc@5%= 99.8% | Curves: 3/3
+  hard_overlap_033               | MAE=0.0047 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_034               | MAE=0.0052 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_035               | MAE=0.0064 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_036               | MAE=0.0064 | Acc@5%= 99.8% | Curves: 2/2
+  medium_atrisk_037              | MAE=0.0051 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_038              | MAE=0.0046 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_039              | MAE=0.0070 | Acc@5%=100.0% | Curves: 2/2
+
+======================================================================
