@@ -12,7 +12,6 @@ Implements curve fidelity metrics similar to those in KM-GPT:
 
 import numpy as np
 from typing import Dict, List, Optional, Tuple
-from scipy import integrate
 
 from .utils import interpolate_step_function
 

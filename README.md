@@ -92,6 +92,20 @@ export ANTHROPIC_API_KEY=your_key_here
 
 The CV-only mode works without an API key.
 
+## Web UI
+
+A Streamlit dashboard lets you run benchmarks, browse results, and digitize your own images -- all from the browser:
+
+```bash
+streamlit run app.py
+```
+
+The UI provides:
+- **Run Benchmark** -- launch synthetic or real-world evaluations with one click
+- **Synthetic Results** -- browse per-plot comparisons, filter by difficulty, view aggregate metrics
+- **Real-World Results** -- view overlay visualizations and error summaries
+- **Digitize Image** -- upload a KM plot and download the extracted data as CSV
+
 ## Quick Start
 
 ### Digitize a single image (hybrid mode)
@@ -212,6 +226,7 @@ src/
 ├── metrics.py             # Evaluation metrics
 └── utils.py               # Shared utilities
 
+app.py                         # Streamlit web dashboard
 run_benchmark.py               # Synthetic data benchmark runner
 run_real_world_benchmark.py     # Real-world published data benchmark
 ```

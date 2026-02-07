@@ -12,11 +12,9 @@ This is less robust than the hybrid approach but useful for:
 import cv2
 import numpy as np
 from typing import Dict, List, Optional, Tuple
-from collections import Counter
 
 from .cv_extractor import (
     detect_plot_bbox_cv,
-    create_color_mask,
     create_line_mask,
     extract_curve_scanline,
     extract_step_function,

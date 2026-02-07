@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment / secrets
+.env
+.env.local
+credentials.json
+
+# Generated data (large, reproducible via scripts)
+data/synthetic/
+data/results/
+data/results_real_world/
+
+# Keep real-world source images and annotations (small, curated)
+# !data/real_world/
+
+# Streamlit
+.streamlit/
