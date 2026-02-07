@@ -1,0 +1,61 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.01609706390465709,
+      "rmse": 0.016939023806870113,
+      "max_error": 0.024803300820611773,
+      "iae": 0.01615380989197732,
+      "concordance_correlation": 0.9941382876129848,
+      "r_squared": 0.9885343807188974,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.08795330004360657,
+      "median_survival_relative_error": 0.00773253806923894,
+      "label": "High Risk"
+    },
+    {
+      "mae": 0.011366243322382237,
+      "rmse": 0.012375628371630896,
+      "max_error": 0.056338028169014454,
+      "iae": 0.011402435512758326,
+      "concordance_correlation": 0.9978489608343869,
+      "r_squared": 0.9957353032471978,
+      "accuracy_5pct": 0.995,
+      "accuracy_3pct": 0.995,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.1718931517459641,
+      "median_survival_relative_error": 0.010829743425689396,
+      "label": "Medium Risk"
+    },
+    {
+      "mae": 0.004553132153088251,
+      "rmse": 0.0053176865217157395,
+      "max_error": 0.018869536703185613,
+      "iae": 0.0045631355309351095,
+      "concordance_correlation": 0.9997004089623491,
+      "r_squared": 0.9994024931271539,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.4632748630085146,
+      "median_survival_relative_error": 0.015879471992476253,
+      "label": "Low Risk"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.010672146460042525,
+    "mean_rmse": 0.01154411290007225,
+    "mean_max_error": 0.03333695523093728,
+    "mean_iae": 0.010706460311890252,
+    "mean_concordance_correlation": 0.9972292191365737,
+    "mean_r_squared": 0.9945573923644163,
+    "mean_accuracy_5pct": 0.9983333333333334,
+    "mean_accuracy_3pct": 0.9983333333333334,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 3,
+    "n_curves_expected": 3
+  },
+  "name": "hard_three_162",
+  "timing": 0.07989692687988281
+}

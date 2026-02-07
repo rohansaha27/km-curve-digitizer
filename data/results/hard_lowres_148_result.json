@@ -1,0 +1,47 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.012024084591426589,
+      "rmse": 0.01741839193632983,
+      "max_error": 0.06607420048807,
+      "iae": 0.012061170630336788,
+      "concordance_correlation": 0.9970980435241156,
+      "r_squared": 0.9944041337490821,
+      "accuracy_5pct": 0.98,
+      "accuracy_3pct": 0.91,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 1.436786997529996,
+      "median_survival_relative_error": 0.06597090489783726,
+      "label": "Treatment"
+    },
+    {
+      "mae": 0.022038081707188385,
+      "rmse": 0.025109100318140228,
+      "max_error": 0.12517348137077,
+      "iae": 0.022102152842920015,
+      "concordance_correlation": 0.9916823471541786,
+      "r_squared": 0.9848076334796286,
+      "accuracy_5pct": 0.98,
+      "accuracy_3pct": 0.925,
+      "accuracy_10pct": 0.995,
+      "median_survival_error": 0.8293452274829249,
+      "median_survival_relative_error": 0.06403005864826897,
+      "label": "Control"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.017031083149307485,
+    "mean_rmse": 0.021263746127235028,
+    "mean_max_error": 0.09562384092942,
+    "mean_iae": 0.017081661736628402,
+    "mean_concordance_correlation": 0.9943901953391471,
+    "mean_r_squared": 0.9896058836143553,
+    "mean_accuracy_5pct": 0.98,
+    "mean_accuracy_3pct": 0.9175,
+    "mean_accuracy_10pct": 0.9975,
+    "n_curves_detected": 2,
+    "n_curves_expected": 2
+  },
+  "name": "hard_lowres_148",
+  "timing": 0.006294965744018555
+}

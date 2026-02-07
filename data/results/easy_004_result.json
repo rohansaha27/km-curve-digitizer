@@ -1,33 +1,33 @@
 {
   "per_curve": [
     {
-      "mae": 0.007592965763245834,
-      "rmse": 0.011050942489260009,
-      "max_error": 0.052175183395769764,
-      "iae": 0.00760713127320831,
-      "concordance_correlation": 0.9986124533985954,
-      "r_squared": 0.9973415548011074,
-      "accuracy_5pct": 0.995,
-      "accuracy_3pct": 0.975,
+      "mae": 0.006434247363374901,
+      "rmse": 0.007761488757932919,
+      "max_error": 0.021827804410354923,
+      "iae": 0.006418400728474606,
+      "concordance_correlation": 0.9992883994744922,
+      "r_squared": 0.9985999041855342,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
       "accuracy_10pct": 1.0,
-      "median_survival_error": 0.6575772591865316,
-      "median_survival_relative_error": 0.019064966605950223,
+      "median_survival_error": 0.491370711685164,
+      "median_survival_relative_error": 0.011026362029348976,
       "label": "Group A"
     }
   ],
   "aggregate": {
-    "mean_mae": 0.007592965763245834,
-    "mean_rmse": 0.011050942489260009,
-    "mean_max_error": 0.052175183395769764,
-    "mean_iae": 0.00760713127320831,
-    "mean_concordance_correlation": 0.9986124533985954,
-    "mean_r_squared": 0.9973415548011074,
-    "mean_accuracy_5pct": 0.995,
-    "mean_accuracy_3pct": 0.975,
+    "mean_mae": 0.006434247363374901,
+    "mean_rmse": 0.007761488757932919,
+    "mean_max_error": 0.021827804410354923,
+    "mean_iae": 0.006418400728474606,
+    "mean_concordance_correlation": 0.9992883994744922,
+    "mean_r_squared": 0.9985999041855342,
+    "mean_accuracy_5pct": 1.0,
+    "mean_accuracy_3pct": 1.0,
     "mean_accuracy_10pct": 1.0,
     "n_curves_detected": 1,
     "n_curves_expected": 1
   },
   "name": "easy_004",
-  "timing": 0.03352093696594238
+  "timing": 0.016498088836669922
 }

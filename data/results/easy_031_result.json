@@ -1,0 +1,33 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.00465413190283958,
+      "rmse": 0.005985637760157407,
+      "max_error": 0.01363284119363567,
+      "iae": 0.004663009994196511,
+      "concordance_correlation": 0.9998068401284248,
+      "r_squared": 0.9996146609153648,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.1167154436100688,
+      "median_survival_relative_error": 0.004123576933527672,
+      "label": "Group A"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.00465413190283958,
+    "mean_rmse": 0.005985637760157407,
+    "mean_max_error": 0.01363284119363567,
+    "mean_iae": 0.004663009994196511,
+    "mean_concordance_correlation": 0.9998068401284248,
+    "mean_r_squared": 0.9996146609153648,
+    "mean_accuracy_5pct": 1.0,
+    "mean_accuracy_3pct": 1.0,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 1,
+    "n_curves_expected": 1
+  },
+  "name": "easy_031",
+  "timing": 0.05979180335998535
+}

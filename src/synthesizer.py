@@ -278,10 +278,21 @@ def _add_at_risk_table(ax, curve_data_list, x_max, plot_spec):
                ha='right', va='top', fontsize=8, color=color, fontweight='bold')
 
 
-def generate_benchmark_suite(output_dir: str, seed: int = 42) -> List[Dict]:
+def generate_benchmark_suite(
+    output_dir: str,
+    seed: int = 42,
+    n_easy: int = 8,
+    n_medium: int = 13,
+    n_hard: int = 19,
+) -> List[Dict]:
     """Generate a comprehensive benchmark suite of synthetic KM plots.
 
     Creates plots across multiple difficulty levels with various edge cases.
+    Sizes are configurable -- use larger values for more rigorous evaluation.
+
+    Default (40 plots): n_easy=8, n_medium=13, n_hard=19
+    Large   (200 plots): n_easy=40, n_medium=80, n_hard=80
+    XL      (500 plots): n_easy=100, n_medium=200, n_hard=200
 
     Returns:
         List of metadata dicts for each generated plot.
@@ -289,233 +300,150 @@ def generate_benchmark_suite(output_dir: str, seed: int = 42) -> List[Dict]:
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    benchmark_specs = []
-    idx = 0
-
-    # ===== EASY: Single curve, clean, full y-axis =====
-    for i in range(8):
-        rng = np.random.default_rng(seed + i)
-        median = rng.uniform(6, 36)
-        shape = rng.choice([0.8, 1.0, 1.2, 1.5])
-        color = ['#1f77b4', '#d62728', '#2ca02c', '#ff7f0e', '#9467bd',
-                 '#8c564b', '#e377c2', '#17becf'][i]
-
-        spec = PlotSpec(
-            curves=[CurveSpec(
-                label='Group A',
-                median_survival=median,
-                n_subjects=rng.integers(50, 200),
-                censoring_rate=rng.uniform(0.1, 0.3),
-                color=color,
-                hazard_shape=shape,
-            )],
-            show_censoring=bool(rng.choice([True, False])),
-            show_grid=bool(rng.choice([True, False])),
-            dpi=150,
-            difficulty='easy',
-            title=f'Survival Analysis' if rng.random() > 0.5 else '',
-        )
-        benchmark_specs.append((f'easy_{idx:03d}', spec, seed + i))
-        idx += 1
-
-    # ===== MEDIUM: Two curves, various styles =====
-    two_curve_colors = [
+    ALL_COLORS = [
+        '#1f77b4', '#d62728', '#2ca02c', '#ff7f0e', '#9467bd',
+        '#8c564b', '#e377c2', '#17becf', '#000000', '#7f7f7f',
+        '#bcbd22', '#aec7e8', '#ff9896', '#98df8a', '#c49c94',
+    ]
+    TWO_CURVE_COLORS = [
         ('#1f77b4', '#d62728'),  # Blue vs Red
         ('#2ca02c', '#ff7f0e'),  # Green vs Orange
         ('#9467bd', '#e377c2'),  # Purple vs Pink
         ('#000000', '#d62728'),  # Black vs Red
         ('#1f77b4', '#2ca02c'),  # Blue vs Green
+        ('#17becf', '#bcbd22'),  # Cyan vs Olive
+        ('#8c564b', '#7f7f7f'),  # Brown vs Gray
+        ('#1f77b4', '#ff7f0e'),  # Blue vs Orange
     ]
-    for i in range(10):
+    THREE_CURVE_COLORS = [
+        ('#d62728', '#ff7f0e', '#2ca02c'),  # Red / Orange / Green
+        ('#1f77b4', '#9467bd', '#2ca02c'),  # Blue / Purple / Green
+        ('#000000', '#d62728', '#1f77b4'),  # Black / Red / Blue
+        ('#e377c2', '#17becf', '#bcbd22'),  # Pink / Cyan / Olive
+    ]
+
+    benchmark_specs = []
+    idx = 0
+
+    # ===== EASY: Single curve, clean, full y-axis =====
+    for i in range(n_easy):
+        rng = np.random.default_rng(seed + i)
+        median = rng.uniform(4, 48)
+        shape = rng.choice([0.7, 0.8, 1.0, 1.2, 1.5, 2.0])
+        color = ALL_COLORS[i % len(ALL_COLORS)]
+
+        spec = PlotSpec(
+            curves=[CurveSpec(
+                label='Group A',
+                median_survival=median,
+                n_subjects=rng.integers(30, 300),
+                censoring_rate=rng.uniform(0.05, 0.4),
+                color=color,
+                hazard_shape=shape,
+            )],
+            show_censoring=bool(rng.choice([True, False])),
+            show_grid=bool(rng.choice([True, False])),
+            dpi=rng.choice([100, 150, 200]),
+            difficulty='easy',
+            title='Survival Analysis' if rng.random() > 0.5 else '',
+        )
+        benchmark_specs.append((f'easy_{idx:03d}', spec, seed + i))
+        idx += 1
+
+    # ===== MEDIUM: Two curves, various styles =====
+    # Subdivide medium into categories
+    n_med_basic = max(1, n_medium * 4 // 10)   # Basic two-curve
+    n_med_ci = max(1, n_medium * 3 // 10)      # With CIs
+    n_med_atrisk = max(1, n_medium - n_med_basic - n_med_ci)  # With at-risk tables
+
+    for i in range(n_med_basic):
         rng = np.random.default_rng(seed + 100 + i)
-        colors = two_curve_colors[i % len(two_curve_colors)]
-        median1 = rng.uniform(8, 30)
-        # Make curves somewhat separated
-        median2 = median1 * rng.uniform(0.4, 0.8)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
+        median1 = rng.uniform(6, 36)
+        median2 = median1 * rng.uniform(0.3, 0.85)
 
         spec = PlotSpec(
             curves=[
                 CurveSpec(
                     label='Treatment',
                     median_survival=median1,
-                    n_subjects=rng.integers(60, 200),
-                    censoring_rate=rng.uniform(0.1, 0.35),
+                    n_subjects=rng.integers(40, 250),
+                    censoring_rate=rng.uniform(0.05, 0.4),
+                    color=colors[0],
+                    hazard_shape=rng.choice([0.7, 0.8, 1.0, 1.2, 1.5]),
+                ),
+                CurveSpec(
+                    label='Control',
+                    median_survival=median2,
+                    n_subjects=rng.integers(40, 250),
+                    censoring_rate=rng.uniform(0.05, 0.4),
+                    color=colors[1],
+                    hazard_shape=rng.choice([0.7, 0.8, 1.0, 1.2, 1.5]),
+                ),
+            ],
+            show_censoring=True,
+            show_ci=False,
+            show_grid=bool(rng.choice([True, False])),
+            dpi=rng.choice([100, 150, 200]),
+            difficulty='medium',
+        )
+        benchmark_specs.append((f'medium_{idx:03d}', spec, seed + 100 + i))
+        idx += 1
+
+    for i in range(n_med_ci):
+        rng = np.random.default_rng(seed + 200 + i)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
+        median1 = rng.uniform(6, 36)
+        median2 = median1 * rng.uniform(0.3, 0.85)
+
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Treatment',
+                    median_survival=median1,
+                    n_subjects=rng.integers(40, 250),
+                    censoring_rate=rng.uniform(0.05, 0.4),
                     color=colors[0],
                     hazard_shape=rng.choice([0.8, 1.0, 1.2]),
                 ),
                 CurveSpec(
                     label='Control',
                     median_survival=median2,
-                    n_subjects=rng.integers(60, 200),
-                    censoring_rate=rng.uniform(0.1, 0.35),
+                    n_subjects=rng.integers(40, 250),
+                    censoring_rate=rng.uniform(0.05, 0.4),
                     color=colors[1],
                     hazard_shape=rng.choice([0.8, 1.0, 1.2]),
                 ),
             ],
             show_censoring=True,
-            show_ci=bool(rng.choice([True, False])),
+            show_ci=True,
             show_grid=bool(rng.choice([True, False])),
             dpi=150,
             difficulty='medium',
         )
-        benchmark_specs.append((f'medium_{idx:03d}', spec, seed + 100 + i))
+        benchmark_specs.append((f'medium_ci_{idx:03d}', spec, seed + 200 + i))
         idx += 1
 
-    # ===== HARD: Multiple curves, truncated y-axis, low resolution, overlapping =====
-    # Truncated y-axis (common in real papers)
-    for i in range(5):
-        rng = np.random.default_rng(seed + 200 + i)
-        colors = ['#1f77b4', '#d62728']
-        y_min = rng.choice([0.2, 0.3, 0.4, 0.5])
-
-        spec = PlotSpec(
-            curves=[
-                CurveSpec(
-                    label='Arm A',
-                    median_survival=rng.uniform(12, 36),
-                    n_subjects=rng.integers(80, 200),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color=colors[0],
-                    hazard_shape=rng.choice([0.8, 1.0, 1.3]),
-                ),
-                CurveSpec(
-                    label='Arm B',
-                    median_survival=rng.uniform(8, 24),
-                    n_subjects=rng.integers(80, 200),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color=colors[1],
-                    hazard_shape=rng.choice([0.8, 1.0, 1.3]),
-                ),
-            ],
-            y_min=y_min,
-            show_censoring=True,
-            show_ci=True,
-            dpi=150,
-            difficulty='hard',
-        )
-        benchmark_specs.append((f'hard_trunc_{idx:03d}', spec, seed + 200 + i))
-        idx += 1
-
-    # Low resolution
-    for i in range(5):
+    for i in range(n_med_atrisk):
         rng = np.random.default_rng(seed + 300 + i)
-        spec = PlotSpec(
-            curves=[
-                CurveSpec(
-                    label='Treatment',
-                    median_survival=rng.uniform(8, 30),
-                    n_subjects=rng.integers(50, 150),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color='#1f77b4',
-                    hazard_shape=1.0,
-                ),
-                CurveSpec(
-                    label='Control',
-                    median_survival=rng.uniform(5, 20),
-                    n_subjects=rng.integers(50, 150),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color='#d62728',
-                    hazard_shape=1.0,
-                ),
-            ],
-            show_censoring=True,
-            figsize=(4, 3),  # Small figure
-            dpi=72,  # Low DPI
-            difficulty='hard',
-        )
-        benchmark_specs.append((f'hard_lowres_{idx:03d}', spec, seed + 300 + i))
-        idx += 1
-
-    # Three curves (more overlapping)
-    for i in range(5):
-        rng = np.random.default_rng(seed + 400 + i)
-        spec = PlotSpec(
-            curves=[
-                CurveSpec(
-                    label='High Risk',
-                    median_survival=rng.uniform(5, 12),
-                    n_subjects=rng.integers(50, 120),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color='#d62728',
-                    hazard_shape=rng.uniform(0.8, 1.5),
-                ),
-                CurveSpec(
-                    label='Medium Risk',
-                    median_survival=rng.uniform(12, 24),
-                    n_subjects=rng.integers(50, 120),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color='#ff7f0e',
-                    hazard_shape=rng.uniform(0.8, 1.5),
-                ),
-                CurveSpec(
-                    label='Low Risk',
-                    median_survival=rng.uniform(24, 48),
-                    n_subjects=rng.integers(50, 120),
-                    censoring_rate=rng.uniform(0.1, 0.3),
-                    color='#2ca02c',
-                    hazard_shape=rng.uniform(0.8, 1.5),
-                ),
-            ],
-            show_censoring=True,
-            show_legend=True,
-            show_grid=bool(rng.choice([True, False])),
-            dpi=150,
-            difficulty='hard',
-        )
-        benchmark_specs.append((f'hard_three_{idx:03d}', spec, seed + 400 + i))
-        idx += 1
-
-    # Closely overlapping curves (same median, small difference)
-    for i in range(4):
-        rng = np.random.default_rng(seed + 500 + i)
-        base_median = rng.uniform(10, 30)
-        spec = PlotSpec(
-            curves=[
-                CurveSpec(
-                    label='Group 1',
-                    median_survival=base_median,
-                    n_subjects=rng.integers(80, 200),
-                    censoring_rate=rng.uniform(0.1, 0.25),
-                    color='#1f77b4',
-                    hazard_shape=1.0,
-                ),
-                CurveSpec(
-                    label='Group 2',
-                    median_survival=base_median * rng.uniform(0.85, 0.95),
-                    n_subjects=rng.integers(80, 200),
-                    censoring_rate=rng.uniform(0.1, 0.25),
-                    color='#d62728',
-                    hazard_shape=1.0,
-                ),
-            ],
-            show_censoring=True,
-            show_ci=True,
-            dpi=150,
-            difficulty='hard',
-        )
-        benchmark_specs.append((f'hard_overlap_{idx:03d}', spec, seed + 500 + i))
-        idx += 1
-
-    # With number-at-risk table
-    for i in range(3):
-        rng = np.random.default_rng(seed + 600 + i)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
         spec = PlotSpec(
             curves=[
                 CurveSpec(
                     label='Drug',
-                    median_survival=rng.uniform(12, 30),
-                    n_subjects=rng.integers(100, 250),
-                    censoring_rate=rng.uniform(0.15, 0.35),
-                    color='#1f77b4',
-                    hazard_shape=1.0,
+                    median_survival=rng.uniform(8, 36),
+                    n_subjects=rng.integers(80, 300),
+                    censoring_rate=rng.uniform(0.1, 0.4),
+                    color=colors[0],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.3]),
                 ),
                 CurveSpec(
                     label='Placebo',
-                    median_survival=rng.uniform(6, 18),
-                    n_subjects=rng.integers(100, 250),
-                    censoring_rate=rng.uniform(0.15, 0.35),
-                    color='#d62728',
-                    hazard_shape=1.0,
+                    median_survival=rng.uniform(4, 20),
+                    n_subjects=rng.integers(80, 300),
+                    censoring_rate=rng.uniform(0.1, 0.4),
+                    color=colors[1],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.3]),
                 ),
             ],
             show_censoring=True,
@@ -524,7 +452,151 @@ def generate_benchmark_suite(output_dir: str, seed: int = 42) -> List[Dict]:
             dpi=150,
             difficulty='medium',
         )
-        benchmark_specs.append((f'medium_atrisk_{idx:03d}', spec, seed + 600 + i))
+        benchmark_specs.append((f'medium_atrisk_{idx:03d}', spec, seed + 300 + i))
+        idx += 1
+
+    # ===== HARD: Multiple edge cases =====
+    # Subdivide hard into categories
+    n_hard_trunc = max(1, n_hard * 3 // 10)     # Truncated y-axis
+    n_hard_lowres = max(1, n_hard * 2 // 10)     # Low resolution
+    n_hard_three = max(1, n_hard * 2 // 10)      # Three curves
+    n_hard_overlap = max(1, n_hard - n_hard_trunc - n_hard_lowres - n_hard_three)
+
+    # Truncated y-axis with CIs
+    for i in range(n_hard_trunc):
+        rng = np.random.default_rng(seed + 400 + i)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
+        y_min = rng.choice([0.2, 0.3, 0.4, 0.5, 0.6])
+
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Arm A',
+                    median_survival=rng.uniform(8, 48),
+                    n_subjects=rng.integers(60, 250),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[0],
+                    hazard_shape=rng.choice([0.7, 0.8, 1.0, 1.3]),
+                ),
+                CurveSpec(
+                    label='Arm B',
+                    median_survival=rng.uniform(6, 30),
+                    n_subjects=rng.integers(60, 250),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[1],
+                    hazard_shape=rng.choice([0.7, 0.8, 1.0, 1.3]),
+                ),
+            ],
+            y_min=y_min,
+            show_censoring=True,
+            show_ci=True,
+            dpi=150,
+            difficulty='hard',
+        )
+        benchmark_specs.append((f'hard_trunc_{idx:03d}', spec, seed + 400 + i))
+        idx += 1
+
+    # Low resolution
+    for i in range(n_hard_lowres):
+        rng = np.random.default_rng(seed + 500 + i)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Treatment',
+                    median_survival=rng.uniform(6, 36),
+                    n_subjects=rng.integers(30, 200),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[0],
+                    hazard_shape=1.0,
+                ),
+                CurveSpec(
+                    label='Control',
+                    median_survival=rng.uniform(4, 24),
+                    n_subjects=rng.integers(30, 200),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[1],
+                    hazard_shape=1.0,
+                ),
+            ],
+            show_censoring=True,
+            figsize=(4, 3),
+            dpi=72,
+            difficulty='hard',
+        )
+        benchmark_specs.append((f'hard_lowres_{idx:03d}', spec, seed + 500 + i))
+        idx += 1
+
+    # Three curves
+    for i in range(n_hard_three):
+        rng = np.random.default_rng(seed + 600 + i)
+        colors = THREE_CURVE_COLORS[i % len(THREE_CURVE_COLORS)]
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='High Risk',
+                    median_survival=rng.uniform(3, 15),
+                    n_subjects=rng.integers(40, 150),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[0],
+                    hazard_shape=rng.uniform(0.7, 1.8),
+                ),
+                CurveSpec(
+                    label='Medium Risk',
+                    median_survival=rng.uniform(10, 30),
+                    n_subjects=rng.integers(40, 150),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[1],
+                    hazard_shape=rng.uniform(0.7, 1.8),
+                ),
+                CurveSpec(
+                    label='Low Risk',
+                    median_survival=rng.uniform(20, 60),
+                    n_subjects=rng.integers(40, 150),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[2],
+                    hazard_shape=rng.uniform(0.7, 1.8),
+                ),
+            ],
+            show_censoring=True,
+            show_legend=True,
+            show_grid=bool(rng.choice([True, False])),
+            dpi=150,
+            difficulty='hard',
+        )
+        benchmark_specs.append((f'hard_three_{idx:03d}', spec, seed + 600 + i))
+        idx += 1
+
+    # Closely overlapping curves with CIs
+    for i in range(n_hard_overlap):
+        rng = np.random.default_rng(seed + 700 + i)
+        base_median = rng.uniform(8, 36)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Group 1',
+                    median_survival=base_median,
+                    n_subjects=rng.integers(60, 250),
+                    censoring_rate=rng.uniform(0.05, 0.3),
+                    color=colors[0],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.2]),
+                ),
+                CurveSpec(
+                    label='Group 2',
+                    median_survival=base_median * rng.uniform(0.8, 0.97),
+                    n_subjects=rng.integers(60, 250),
+                    censoring_rate=rng.uniform(0.05, 0.3),
+                    color=colors[1],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.2]),
+                ),
+            ],
+            show_censoring=True,
+            show_ci=True,
+            dpi=150,
+            difficulty='hard',
+        )
+        benchmark_specs.append((f'hard_overlap_{idx:03d}', spec, seed + 700 + i))
         idx += 1
 
     # Generate all plots

@@ -1,0 +1,47 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.004085058554365807,
+      "rmse": 0.00506512984318889,
+      "max_error": 0.019055279321438467,
+      "iae": 0.004098298414822807,
+      "concordance_correlation": 0.9998461276920918,
+      "r_squared": 0.9996922960675068,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.00568162990984078,
+      "median_survival_relative_error": 0.00018769402597846569,
+      "label": "Drug"
+    },
+    {
+      "mae": 0.0052189224761730844,
+      "rmse": 0.006153697219625775,
+      "max_error": 0.02481089788485824,
+      "iae": 0.005237860145282383,
+      "concordance_correlation": 0.9996449066135654,
+      "r_squared": 0.9992891134937014,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.01066927950307317,
+      "median_survival_relative_error": 0.0007930954820558657,
+      "label": "Placebo"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.004651990515269445,
+    "mean_rmse": 0.005609413531407332,
+    "mean_max_error": 0.021933088603148354,
+    "mean_iae": 0.004668079280052595,
+    "mean_concordance_correlation": 0.9997455171528287,
+    "mean_r_squared": 0.9994907047806041,
+    "mean_accuracy_5pct": 1.0,
+    "mean_accuracy_3pct": 1.0,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 2,
+    "n_curves_expected": 2
+  },
+  "name": "medium_atrisk_114",
+  "timing": 0.0631260871887207
+}

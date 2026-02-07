@@ -1,0 +1,47 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.008534531348681203,
+      "rmse": 0.009314387213455773,
+      "max_error": 0.036721120558277365,
+      "iae": 0.008557111647134968,
+      "concordance_correlation": 0.9911710044947255,
+      "r_squared": 0.9817762925183972,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 0.985,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 1.5223536899282522,
+      "median_survival_relative_error": 0.04068425204261138,
+      "label": "Arm A"
+    },
+    {
+      "mae": 0.02388254402776745,
+      "rmse": 0.02446824838218246,
+      "max_error": 0.03506652773294383,
+      "iae": 0.02397451409664709,
+      "concordance_correlation": 0.9103511776453954,
+      "r_squared": 0.8095205460705865,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 0.995,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.3567516827912094,
+      "median_survival_relative_error": 0.017990462342828042,
+      "label": "Arm B"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.016208537688224327,
+    "mean_rmse": 0.016891317797819116,
+    "mean_max_error": 0.0358938241456106,
+    "mean_iae": 0.01626581287189103,
+    "mean_concordance_correlation": 0.9507610910700605,
+    "mean_r_squared": 0.8956484192944918,
+    "mean_accuracy_5pct": 1.0,
+    "mean_accuracy_3pct": 0.99,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 2,
+    "n_curves_expected": 2
+  },
+  "name": "hard_trunc_120",
+  "timing": 0.04746127128601074
+}

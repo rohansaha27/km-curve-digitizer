@@ -1,0 +1,61 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.004005697438195169,
+      "rmse": 0.008773760236180542,
+      "max_error": 0.062235789690645915,
+      "iae": 0.004019379969859734,
+      "concordance_correlation": 0.9982800607803076,
+      "r_squared": 0.9964316309596166,
+      "accuracy_5pct": 0.985,
+      "accuracy_3pct": 0.975,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 1.3005143749781034,
+      "median_survival_relative_error": 0.12582763681478223,
+      "label": "High Risk"
+    },
+    {
+      "mae": 0.006529780701130064,
+      "rmse": 0.007439813413170848,
+      "max_error": 0.04062584852529552,
+      "iae": 0.006549700467096076,
+      "concordance_correlation": 0.9986635771994857,
+      "r_squared": 0.9973073930188449,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 0.99,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.23202505814674268,
+      "median_survival_relative_error": 0.02236731651291001,
+      "label": "Medium Risk"
+    },
+    {
+      "mae": 0.004637555845386985,
+      "rmse": 0.00581286632863887,
+      "max_error": 0.0280628608082103,
+      "iae": 0.0046447436431408555,
+      "concordance_correlation": 0.999671140982522,
+      "r_squared": 0.9993376163653618,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 1.0,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.1959854565955652,
+      "median_survival_relative_error": 0.005678868239464475,
+      "label": "Low Risk"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.005057677994904072,
+    "mean_rmse": 0.007342146659330087,
+    "mean_max_error": 0.04364149967471725,
+    "mean_iae": 0.005071274693365556,
+    "mean_concordance_correlation": 0.9988715929874384,
+    "mean_r_squared": 0.9976922134479412,
+    "mean_accuracy_5pct": 0.995,
+    "mean_accuracy_3pct": 0.9883333333333333,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 3,
+    "n_curves_expected": 3
+  },
+  "name": "hard_three_167",
+  "timing": 0.07272601127624512
+}

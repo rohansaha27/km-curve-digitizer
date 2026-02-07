@@ -4,77 +4,237 @@ KM CURVE DIGITIZATION BENCHMARK REPORT
 
 OVERALL PERFORMANCE
 ----------------------------------------
-  Total plots evaluated: 40
-  Mean MAE:             0.0085 (±0.0037)
-  Mean RMSE:            0.0107 (±0.0046)
-  Mean CCC:             0.9969 (±0.0055)
-  Mean R²:              0.9940 (±0.0109)
-  Accuracy (<3% err):   97.8%
-  Accuracy (<5% err):   99.6%
-  Accuracy (<10% err):  100.0%
+  Total plots evaluated: 200
+  Mean MAE:             0.0091 (±0.0050)
+  Mean RMSE:            0.0112 (±0.0070)
+  Mean CCC:             0.9944 (±0.0190)
+  Mean R²:              0.9886 (±0.0401)
+  Accuracy (<3% err):   96.6%
+  Accuracy (<5% err):   99.5%
+  Accuracy (<10% err):  99.9%
 
 DIFFICULTY: EASY
 ----------------------------------------
-  Plots: 8
-  Mean MAE:           0.0083 (±0.0030)
-  Accuracy (<5% err): 99.9%
-  Mean CCC:           0.9989
+  Plots: 40
+  Mean MAE:           0.0087 (±0.0063)
+  Accuracy (<5% err): 99.1%
+  Mean CCC:           0.9980
 
 DIFFICULTY: HARD
 ----------------------------------------
-  Plots: 19
-  Mean MAE:           0.0100 (±0.0042)
-  Accuracy (<5% err): 99.3%
-  Mean CCC:           0.9946
+  Plots: 80
+  Mean MAE:           0.0110 (±0.0054)
+  Accuracy (<5% err): 99.4%
+  Mean CCC:           0.9883
 
 DIFFICULTY: MEDIUM
 ----------------------------------------
-  Plots: 13
-  Mean MAE:           0.0064 (±0.0014)
-  Accuracy (<5% err): 100.0%
-  Mean CCC:           0.9992
+  Plots: 80
+  Mean MAE:           0.0073 (±0.0025)
+  Accuracy (<5% err): 99.9%
+  Mean CCC:           0.9986
 
 PER-PLOT DETAILS
 ----------------------------------------------------------------------
-  easy_000                       | MAE=0.0051 | Acc@5%=100.0% | Curves: 1/1
-  easy_001                       | MAE=0.0133 | Acc@5%=100.0% | Curves: 1/1
-  easy_002                       | MAE=0.0051 | Acc@5%=100.0% | Curves: 1/1
-  easy_003                       | MAE=0.0074 | Acc@5%=100.0% | Curves: 1/1
-  easy_004                       | MAE=0.0076 | Acc@5%= 99.5% | Curves: 1/1
-  easy_005                       | MAE=0.0095 | Acc@5%= 99.5% | Curves: 1/1
-  easy_006                       | MAE=0.0056 | Acc@5%=100.0% | Curves: 1/1
-  easy_007                       | MAE=0.0126 | Acc@5%=100.0% | Curves: 1/1
-  medium_008                     | MAE=0.0085 | Acc@5%=100.0% | Curves: 2/2
-  medium_009                     | MAE=0.0063 | Acc@5%=100.0% | Curves: 2/2
-  medium_010                     | MAE=0.0087 | Acc@5%= 99.8% | Curves: 2/2
-  medium_011                     | MAE=0.0059 | Acc@5%=100.0% | Curves: 2/2
-  medium_012                     | MAE=0.0070 | Acc@5%=100.0% | Curves: 2/2
-  medium_013                     | MAE=0.0085 | Acc@5%=100.0% | Curves: 2/2
-  medium_014                     | MAE=0.0069 | Acc@5%=100.0% | Curves: 2/2
-  medium_015                     | MAE=0.0053 | Acc@5%= 99.8% | Curves: 2/2
-  medium_016                     | MAE=0.0047 | Acc@5%=100.0% | Curves: 2/2
-  medium_017                     | MAE=0.0052 | Acc@5%=100.0% | Curves: 2/2
-  hard_trunc_018                 | MAE=0.0088 | Acc@5%= 99.8% | Curves: 2/2
-  hard_trunc_019                 | MAE=0.0110 | Acc@5%=100.0% | Curves: 2/2
-  hard_trunc_020                 | MAE=0.0079 | Acc@5%=100.0% | Curves: 2/2
-  hard_trunc_021                 | MAE=0.0207 | Acc@5%=100.0% | Curves: 2/2
-  hard_trunc_022                 | MAE=0.0084 | Acc@5%= 99.5% | Curves: 2/2
-  hard_lowres_023                | MAE=0.0123 | Acc@5%= 97.8% | Curves: 2/2
-  hard_lowres_024                | MAE=0.0173 | Acc@5%= 97.5% | Curves: 2/2
-  hard_lowres_025                | MAE=0.0110 | Acc@5%= 98.0% | Curves: 2/2
-  hard_lowres_026                | MAE=0.0168 | Acc@5%= 97.0% | Curves: 2/2
-  hard_lowres_027                | MAE=0.0114 | Acc@5%= 99.2% | Curves: 2/2
-  hard_three_028                 | MAE=0.0081 | Acc@5%= 99.8% | Curves: 3/3
-  hard_three_029                 | MAE=0.0102 | Acc@5%= 99.7% | Curves: 3/3
-  hard_three_030                 | MAE=0.0058 | Acc@5%=100.0% | Curves: 3/3
-  hard_three_031                 | MAE=0.0108 | Acc@5%=100.0% | Curves: 3/3
-  hard_three_032                 | MAE=0.0077 | Acc@5%= 99.8% | Curves: 3/3
-  hard_overlap_033               | MAE=0.0047 | Acc@5%= 99.8% | Curves: 2/2
-  hard_overlap_034               | MAE=0.0052 | Acc@5%=100.0% | Curves: 2/2
-  hard_overlap_035               | MAE=0.0064 | Acc@5%= 99.8% | Curves: 2/2
-  hard_overlap_036               | MAE=0.0064 | Acc@5%= 99.8% | Curves: 2/2
-  medium_atrisk_037              | MAE=0.0051 | Acc@5%=100.0% | Curves: 2/2
-  medium_atrisk_038              | MAE=0.0046 | Acc@5%=100.0% | Curves: 2/2
-  medium_atrisk_039              | MAE=0.0070 | Acc@5%=100.0% | Curves: 2/2
+  easy_000                       | MAE=0.0110 | Acc@5%= 99.5% | Curves: 1/1
+  easy_001                       | MAE=0.0065 | Acc@5%=100.0% | Curves: 1/1
+  easy_002                       | MAE=0.0135 | Acc@5%=100.0% | Curves: 1/1
+  easy_003                       | MAE=0.0125 | Acc@5%= 99.5% | Curves: 1/1
+  easy_004                       | MAE=0.0064 | Acc@5%=100.0% | Curves: 1/1
+  easy_005                       | MAE=0.0049 | Acc@5%=100.0% | Curves: 1/1
+  easy_006                       | MAE=0.0066 | Acc@5%= 99.5% | Curves: 1/1
+  easy_007                       | MAE=0.0051 | Acc@5%=100.0% | Curves: 1/1
+  easy_008                       | MAE=0.0129 | Acc@5%=100.0% | Curves: 1/1
+  easy_009                       | MAE=0.0049 | Acc@5%=100.0% | Curves: 1/1
+  easy_010                       | MAE=0.0073 | Acc@5%= 99.5% | Curves: 1/1
+  easy_011                       | MAE=0.0103 | Acc@5%=100.0% | Curves: 1/1
+  easy_012                       | MAE=0.0047 | Acc@5%=100.0% | Curves: 1/1
+  easy_013                       | MAE=0.0131 | Acc@5%=100.0% | Curves: 1/1
+  easy_014                       | MAE=0.0062 | Acc@5%=100.0% | Curves: 1/1
+  easy_015                       | MAE=0.0049 | Acc@5%=100.0% | Curves: 1/1
+  easy_016                       | MAE=0.0050 | Acc@5%=100.0% | Curves: 1/1
+  easy_017                       | MAE=0.0059 | Acc@5%=100.0% | Curves: 1/1
+  easy_018                       | MAE=0.0139 | Acc@5%= 99.0% | Curves: 1/1
+  easy_019                       | MAE=0.0126 | Acc@5%= 99.5% | Curves: 1/1
+  easy_020                       | MAE=0.0078 | Acc@5%=100.0% | Curves: 1/1
+  easy_021                       | MAE=0.0049 | Acc@5%=100.0% | Curves: 1/1
+  easy_022                       | MAE=0.0046 | Acc@5%=100.0% | Curves: 1/1
+  easy_023                       | MAE=0.0104 | Acc@5%=100.0% | Curves: 1/1
+  easy_024                       | MAE=0.0053 | Acc@5%= 99.5% | Curves: 1/1
+  easy_025                       | MAE=0.0085 | Acc@5%=100.0% | Curves: 1/1
+  easy_026                       | MAE=0.0093 | Acc@5%= 99.5% | Curves: 1/1
+  easy_027                       | MAE=0.0116 | Acc@5%= 99.5% | Curves: 1/1
+  easy_028                       | MAE=0.0073 | Acc@5%=100.0% | Curves: 1/1
+  easy_029                       | MAE=0.0038 | Acc@5%=100.0% | Curves: 1/1
+  easy_030                       | MAE=0.0437 | Acc@5%= 72.5% | Curves: 1/1
+  easy_031                       | MAE=0.0047 | Acc@5%=100.0% | Curves: 1/1
+  easy_032                       | MAE=0.0102 | Acc@5%= 99.0% | Curves: 1/1
+  easy_033                       | MAE=0.0070 | Acc@5%= 99.5% | Curves: 1/1
+  easy_034                       | MAE=0.0040 | Acc@5%=100.0% | Curves: 1/1
+  easy_035                       | MAE=0.0050 | Acc@5%=100.0% | Curves: 1/1
+  easy_036                       | MAE=0.0083 | Acc@5%= 99.5% | Curves: 1/1
+  easy_037                       | MAE=0.0080 | Acc@5%=100.0% | Curves: 1/1
+  easy_038                       | MAE=0.0078 | Acc@5%=100.0% | Curves: 1/1
+  easy_039                       | MAE=0.0069 | Acc@5%=100.0% | Curves: 1/1
+  medium_040                     | MAE=0.0101 | Acc@5%=100.0% | Curves: 2/2
+  medium_041                     | MAE=0.0051 | Acc@5%=100.0% | Curves: 2/2
+  medium_042                     | MAE=0.0105 | Acc@5%=100.0% | Curves: 2/2
+  medium_043                     | MAE=0.0054 | Acc@5%=100.0% | Curves: 2/2
+  medium_044                     | MAE=0.0103 | Acc@5%=100.0% | Curves: 2/2
+  medium_045                     | MAE=0.0059 | Acc@5%=100.0% | Curves: 2/2
+  medium_046                     | MAE=0.0092 | Acc@5%= 98.2% | Curves: 2/2
+  medium_047                     | MAE=0.0062 | Acc@5%=100.0% | Curves: 2/2
+  medium_048                     | MAE=0.0046 | Acc@5%=100.0% | Curves: 2/2
+  medium_049                     | MAE=0.0072 | Acc@5%=100.0% | Curves: 2/2
+  medium_050                     | MAE=0.0073 | Acc@5%=100.0% | Curves: 2/2
+  medium_051                     | MAE=0.0051 | Acc@5%=100.0% | Curves: 2/2
+  medium_052                     | MAE=0.0130 | Acc@5%=100.0% | Curves: 2/2
+  medium_053                     | MAE=0.0076 | Acc@5%=100.0% | Curves: 2/2
+  medium_054                     | MAE=0.0065 | Acc@5%=100.0% | Curves: 2/2
+  medium_055                     | MAE=0.0080 | Acc@5%= 99.8% | Curves: 2/2
+  medium_056                     | MAE=0.0079 | Acc@5%=100.0% | Curves: 2/2
+  medium_057                     | MAE=0.0050 | Acc@5%=100.0% | Curves: 2/2
+  medium_058                     | MAE=0.0090 | Acc@5%=100.0% | Curves: 2/2
+  medium_059                     | MAE=0.0063 | Acc@5%=100.0% | Curves: 2/2
+  medium_060                     | MAE=0.0042 | Acc@5%=100.0% | Curves: 2/2
+  medium_061                     | MAE=0.0065 | Acc@5%=100.0% | Curves: 2/2
+  medium_062                     | MAE=0.0085 | Acc@5%=100.0% | Curves: 2/2
+  medium_063                     | MAE=0.0062 | Acc@5%=100.0% | Curves: 2/2
+  medium_064                     | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  medium_065                     | MAE=0.0055 | Acc@5%=100.0% | Curves: 2/2
+  medium_066                     | MAE=0.0076 | Acc@5%=100.0% | Curves: 2/2
+  medium_067                     | MAE=0.0070 | Acc@5%= 99.5% | Curves: 2/2
+  medium_068                     | MAE=0.0170 | Acc@5%=100.0% | Curves: 2/2
+  medium_069                     | MAE=0.0064 | Acc@5%=100.0% | Curves: 2/2
+  medium_070                     | MAE=0.0079 | Acc@5%=100.0% | Curves: 2/2
+  medium_071                     | MAE=0.0048 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_072                  | MAE=0.0072 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_073                  | MAE=0.0087 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_074                  | MAE=0.0064 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_075                  | MAE=0.0116 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_076                  | MAE=0.0050 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_077                  | MAE=0.0045 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_078                  | MAE=0.0089 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_079                  | MAE=0.0080 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_080                  | MAE=0.0067 | Acc@5%= 99.8% | Curves: 2/2
+  medium_ci_081                  | MAE=0.0099 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_082                  | MAE=0.0054 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_083                  | MAE=0.0054 | Acc@5%= 99.8% | Curves: 2/2
+  medium_ci_084                  | MAE=0.0075 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_085                  | MAE=0.0100 | Acc@5%= 99.8% | Curves: 2/2
+  medium_ci_086                  | MAE=0.0124 | Acc@5%= 99.8% | Curves: 2/2
+  medium_ci_087                  | MAE=0.0068 | Acc@5%= 99.8% | Curves: 2/2
+  medium_ci_088                  | MAE=0.0055 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_089                  | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_090                  | MAE=0.0068 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_091                  | MAE=0.0075 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_092                  | MAE=0.0046 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_093                  | MAE=0.0093 | Acc@5%= 99.8% | Curves: 2/2
+  medium_ci_094                  | MAE=0.0064 | Acc@5%=100.0% | Curves: 2/2
+  medium_ci_095                  | MAE=0.0071 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_096              | MAE=0.0103 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_097              | MAE=0.0084 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_098              | MAE=0.0070 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_099              | MAE=0.0075 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_100              | MAE=0.0075 | Acc@5%= 99.8% | Curves: 2/2
+  medium_atrisk_101              | MAE=0.0081 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_102              | MAE=0.0064 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_103              | MAE=0.0045 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_104              | MAE=0.0068 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_105              | MAE=0.0045 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_106              | MAE=0.0084 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_107              | MAE=0.0052 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_108              | MAE=0.0071 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_109              | MAE=0.0059 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_110              | MAE=0.0067 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_111              | MAE=0.0047 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_112              | MAE=0.0065 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_113              | MAE=0.0044 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_114              | MAE=0.0047 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_115              | MAE=0.0063 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_116              | MAE=0.0065 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_117              | MAE=0.0185 | Acc@5%= 94.5% | Curves: 2/2
+  medium_atrisk_118              | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  medium_atrisk_119              | MAE=0.0081 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_120                 | MAE=0.0162 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_121                 | MAE=0.0176 | Acc@5%= 97.8% | Curves: 2/2
+  hard_trunc_122                 | MAE=0.0201 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_123                 | MAE=0.0105 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_124                 | MAE=0.0103 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_125                 | MAE=0.0074 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_126                 | MAE=0.0201 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_127                 | MAE=0.0199 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_128                 | MAE=0.0143 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_129                 | MAE=0.0063 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_130                 | MAE=0.0094 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_131                 | MAE=0.0166 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_132                 | MAE=0.0174 | Acc@5%= 99.2% | Curves: 2/2
+  hard_trunc_133                 | MAE=0.0073 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_134                 | MAE=0.0156 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_135                 | MAE=0.0222 | Acc@5%= 99.8% | Curves: 2/2
+  hard_trunc_136                 | MAE=0.0121 | Acc@5%= 99.8% | Curves: 2/2
+  hard_trunc_137                 | MAE=0.0133 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_138                 | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_139                 | MAE=0.0263 | Acc@5%= 99.8% | Curves: 2/2
+  hard_trunc_140                 | MAE=0.0146 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_141                 | MAE=0.0162 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_142                 | MAE=0.0049 | Acc@5%=100.0% | Curves: 2/2
+  hard_trunc_143                 | MAE=0.0153 | Acc@5%=100.0% | Curves: 2/2
+  hard_lowres_144                | MAE=0.0159 | Acc@5%= 99.2% | Curves: 2/2
+  hard_lowres_145                | MAE=0.0111 | Acc@5%= 98.0% | Curves: 2/2
+  hard_lowres_146                | MAE=0.0155 | Acc@5%= 96.8% | Curves: 2/2
+  hard_lowres_147                | MAE=0.0201 | Acc@5%= 98.0% | Curves: 2/2
+  hard_lowres_148                | MAE=0.0170 | Acc@5%= 98.0% | Curves: 2/2
+  hard_lowres_149                | MAE=0.0123 | Acc@5%= 96.8% | Curves: 2/2
+  hard_lowres_150                | MAE=0.0179 | Acc@5%= 96.5% | Curves: 2/2
+  hard_lowres_151                | MAE=0.0121 | Acc@5%= 98.8% | Curves: 2/2
+  hard_lowres_152                | MAE=0.0124 | Acc@5%= 97.8% | Curves: 2/2
+  hard_lowres_153                | MAE=0.0179 | Acc@5%= 96.8% | Curves: 2/2
+  hard_lowres_154                | MAE=0.0231 | Acc@5%= 90.0% | Curves: 2/2
+  hard_lowres_155                | MAE=0.0186 | Acc@5%= 97.8% | Curves: 2/2
+  hard_lowres_156                | MAE=0.0121 | Acc@5%= 98.5% | Curves: 2/2
+  hard_lowres_157                | MAE=0.0150 | Acc@5%= 97.8% | Curves: 2/2
+  hard_lowres_158                | MAE=0.0213 | Acc@5%= 98.5% | Curves: 2/2
+  hard_lowres_159                | MAE=0.0124 | Acc@5%= 98.0% | Curves: 2/2
+  hard_three_160                 | MAE=0.0066 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_161                 | MAE=0.0095 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_162                 | MAE=0.0107 | Acc@5%= 99.8% | Curves: 3/3
+  hard_three_163                 | MAE=0.0083 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_164                 | MAE=0.0092 | Acc@5%= 99.7% | Curves: 3/3
+  hard_three_165                 | MAE=0.0145 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_166                 | MAE=0.0113 | Acc@5%= 99.8% | Curves: 3/3
+  hard_three_167                 | MAE=0.0051 | Acc@5%= 99.5% | Curves: 3/3
+  hard_three_168                 | MAE=0.0093 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_169                 | MAE=0.0090 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_170                 | MAE=0.0089 | Acc@5%= 99.8% | Curves: 3/3
+  hard_three_171                 | MAE=0.0055 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_172                 | MAE=0.0074 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_173                 | MAE=0.0090 | Acc@5%= 99.8% | Curves: 3/3
+  hard_three_174                 | MAE=0.0065 | Acc@5%=100.0% | Curves: 3/3
+  hard_three_175                 | MAE=0.0079 | Acc@5%=100.0% | Curves: 3/3
+  hard_overlap_176               | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_177               | MAE=0.0068 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_178               | MAE=0.0069 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_179               | MAE=0.0072 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_180               | MAE=0.0058 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_181               | MAE=0.0081 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_182               | MAE=0.0069 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_183               | MAE=0.0065 | Acc@5%= 99.5% | Curves: 2/2
+  hard_overlap_184               | MAE=0.0065 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_185               | MAE=0.0058 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_186               | MAE=0.0077 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_187               | MAE=0.0080 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_188               | MAE=0.0048 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_189               | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_190               | MAE=0.0050 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_191               | MAE=0.0061 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_192               | MAE=0.0055 | Acc@5%= 99.5% | Curves: 2/2
+  hard_overlap_193               | MAE=0.0055 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_194               | MAE=0.0046 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_195               | MAE=0.0053 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_196               | MAE=0.0051 | Acc@5%= 99.8% | Curves: 2/2
+  hard_overlap_197               | MAE=0.0057 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_198               | MAE=0.0070 | Acc@5%=100.0% | Curves: 2/2
+  hard_overlap_199               | MAE=0.0046 | Acc@5%=100.0% | Curves: 2/2
 
 ======================================================================

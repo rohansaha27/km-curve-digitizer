@@ -1,0 +1,47 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.006421090915369454,
+      "rmse": 0.008834986414865175,
+      "max_error": 0.07203153988868216,
+      "iae": 0.00642921392284402,
+      "concordance_correlation": 0.9991920627297848,
+      "r_squared": 0.9983801807393642,
+      "accuracy_5pct": 0.995,
+      "accuracy_3pct": 0.995,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 0.34168498699376215,
+      "median_survival_relative_error": 0.008864118915084134,
+      "label": "Group 1"
+    },
+    {
+      "mae": 0.0046649510322065695,
+      "rmse": 0.007791452011569498,
+      "max_error": 0.06938775510204098,
+      "iae": 0.004680345070177573,
+      "concordance_correlation": 0.9993255631266083,
+      "r_squared": 0.9986386585575707,
+      "accuracy_5pct": 0.995,
+      "accuracy_3pct": 0.995,
+      "accuracy_10pct": 1.0,
+      "median_survival_error": 1.2805627929584773,
+      "median_survival_relative_error": 0.037844725515739815,
+      "label": "Group 2"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.005543020973788011,
+    "mean_rmse": 0.008313219213217336,
+    "mean_max_error": 0.07070964749536157,
+    "mean_iae": 0.005554779496510797,
+    "mean_concordance_correlation": 0.9992588129281965,
+    "mean_r_squared": 0.9985094196484674,
+    "mean_accuracy_5pct": 0.995,
+    "mean_accuracy_3pct": 0.995,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 2,
+    "n_curves_expected": 2
+  },
+  "name": "hard_overlap_192",
+  "timing": 0.0625159740447998
+}

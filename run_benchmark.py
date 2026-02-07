@@ -5,11 +5,20 @@ KM Curve Digitizer Benchmark Runner.
 Generates synthetic KM plots, runs the digitizer on each, and evaluates performance.
 
 Usage:
-    # Full benchmark (requires ANTHROPIC_API_KEY)
+    # Default benchmark (40 plots, no API key needed for CV-only)
+    python run_benchmark.py --cv-only
+
+    # Large benchmark (200 plots) for rigorous evaluation
+    python run_benchmark.py --cv-only --size large
+
+    # XL benchmark (500 plots) for publication-grade evaluation
+    python run_benchmark.py --cv-only --size xl
+
+    # Full hybrid benchmark (requires ANTHROPIC_API_KEY)
     python run_benchmark.py
 
     # Generate synthetic data only (no API key needed)
-    python run_benchmark.py --generate-only
+    python run_benchmark.py --generate-only --size large
 
     # Run on a single image
     python run_benchmark.py --single path/to/image.png
@@ -64,6 +73,9 @@ def parse_args():
                         help='Use CV-only mode (no LLM, uses ground truth hints for axis/color)')
     parser.add_argument('--cv-auto', action='store_true',
                         help='Use fully automatic CV-only mode (no LLM, no ground truth hints)')
+    parser.add_argument('--size', type=str, default='default',
+                        choices=['small', 'default', 'large', 'xl'],
+                        help='Benchmark size: small(20), default(40), large(200), xl(500)')
     return parser.parse_args()
 
 
@@ -94,13 +106,23 @@ def run_single_image(image_path: str, model: str, verbose: bool = True):
     return results
 
 
-def generate_benchmark(output_dir: str, seed: int):
+BENCHMARK_SIZES = {
+    'small':   {'n_easy': 5,   'n_medium': 8,   'n_hard': 7},
+    'default': {'n_easy': 8,   'n_medium': 13,  'n_hard': 19},
+    'large':   {'n_easy': 40,  'n_medium': 80,  'n_hard': 80},
+    'xl':      {'n_easy': 100, 'n_medium': 200, 'n_hard': 200},
+}
+
+
+def generate_benchmark(output_dir: str, seed: int, size: str = 'default'):
     """Generate the synthetic benchmark dataset."""
+    sizes = BENCHMARK_SIZES[size]
+    total = sum(sizes.values())
     print("\n" + "=" * 60)
-    print("GENERATING SYNTHETIC BENCHMARK")
+    print(f"GENERATING SYNTHETIC BENCHMARK (size={size}, {total} plots)")
     print("=" * 60)
 
-    metadata = generate_benchmark_suite(output_dir, seed=seed)
+    metadata = generate_benchmark_suite(output_dir, seed=seed, **sizes)
     print(f"\nGenerated {len(metadata)} synthetic plots in {output_dir}")
     return metadata
 
@@ -386,7 +408,7 @@ def main():
 
     # Benchmark mode
     if not args.skip_generate:
-        generate_benchmark(args.output_dir, args.seed)
+        generate_benchmark(args.output_dir, args.seed, size=args.size)
 
     if args.generate_only:
         print("\nBenchmark data generated. Run without --generate-only to evaluate.")

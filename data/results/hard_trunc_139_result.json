@@ -1,0 +1,43 @@
+{
+  "per_curve": [
+    {
+      "mae": 0.029968674493129007,
+      "rmse": 0.030200211527081175,
+      "max_error": 0.06940929500262372,
+      "iae": 0.030069632018197543,
+      "concordance_correlation": 0.6985700831222558,
+      "r_squared": 0.3221042554575472,
+      "accuracy_5pct": 0.995,
+      "accuracy_3pct": 0.02,
+      "accuracy_10pct": 1.0,
+      "label": "Arm A"
+    },
+    {
+      "mae": 0.022642831354307905,
+      "rmse": 0.022915724048064582,
+      "max_error": 0.04117124814684814,
+      "iae": 0.022717290159176912,
+      "concordance_correlation": 0.8667114776234284,
+      "r_squared": 0.7446268421641464,
+      "accuracy_5pct": 1.0,
+      "accuracy_3pct": 0.985,
+      "accuracy_10pct": 1.0,
+      "label": "Arm B"
+    }
+  ],
+  "aggregate": {
+    "mean_mae": 0.026305752923718458,
+    "mean_rmse": 0.026557967787572877,
+    "mean_max_error": 0.05529027157473593,
+    "mean_iae": 0.026393461088687228,
+    "mean_concordance_correlation": 0.7826407803728421,
+    "mean_r_squared": 0.5333655488108469,
+    "mean_accuracy_5pct": 0.9975,
+    "mean_accuracy_3pct": 0.5025,
+    "mean_accuracy_10pct": 1.0,
+    "n_curves_detected": 2,
+    "n_curves_expected": 2
+  },
+  "name": "hard_trunc_139",
+  "timing": 0.0483090877532959
+}
