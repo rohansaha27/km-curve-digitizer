@@ -13,10 +13,6 @@ import time
 from pathlib import Path
 
 import streamlit as st
-import numpy as np
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 
 # ---------------------------------------------------------------------------
 # Page config
@@ -80,7 +76,7 @@ def _run_command(cmd: list[str], placeholder) -> bool:
 st.sidebar.title("KM Curve Digitizer")
 page = st.sidebar.radio(
     "Navigate",
-    ["Overview", "Run Benchmark", "Synthetic Results", "Real-World Results", "Digitize Image"],
+    ["Overview", "Run Benchmark", "Synthetic Results", "Real-World Results"],
     index=0,
 )
 
@@ -104,7 +100,6 @@ if page == "Overview":
     | **Run Benchmark** | Generate synthetic data and run the evaluation pipeline |
     | **Synthetic Results** | View metrics, charts, and per-plot comparisons from the synthetic benchmark |
     | **Real-World Results** | View digitization results on published clinical KM plots |
-    | **Digitize Image** | Upload your own KM plot and digitize it |
     """)
 
     col1, col2, col3 = st.columns(3)
@@ -360,185 +355,3 @@ elif page == "Real-World Results":
     if json_path.exists():
         with st.expander("Raw JSON Results"):
             st.json(_load_json(json_path))
-
-
-# ===================================================================
-# PAGE: Digitize Image
-# ===================================================================
-elif page == "Digitize Image":
-    st.title("Digitize a KM Plot")
-    st.markdown("Upload a KM survival curve image and extract the survival data.")
-
-    uploaded = st.file_uploader(
-        "Upload a KM plot image",
-        type=["png", "jpg", "jpeg", "gif", "webp"],
-    )
-
-    if uploaded:
-        # Show the uploaded image
-        st.image(uploaded, caption="Uploaded image", use_container_width=True)
-
-        st.subheader("Extraction Settings")
-
-        mode = st.radio(
-            "Mode",
-            ["CV-only (provide axis ranges manually)", "Hybrid LLM+CV (requires API key)"],
-            index=0,
-        )
-
-        if "CV-only" in mode:
-            col1, col2 = st.columns(2)
-            with col1:
-                x_min = st.number_input("X-axis min", value=0.0)
-                x_max = st.number_input("X-axis max", value=48.0)
-            with col2:
-                y_min = st.number_input("Y-axis min", value=0.0)
-                y_max = st.number_input("Y-axis max", value=1.0)
-
-            color_tolerance = st.slider("Color tolerance", 20.0, 60.0, 35.0, 1.0)
-
-            if st.button("Digitize", type="primary"):
-                import tempfile
-                import cv2
-                from src.cv_only_digitizer import digitize_cv_only
-                from src.utils import interpolate_step_function
-
-                # Save uploaded file to temp
-                with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
-                    tmp.write(uploaded.getvalue())
-                    tmp_path = tmp.name
-
-                with st.spinner("Running CV extraction..."):
-                    try:
-                        results = digitize_cv_only(
-                            tmp_path,
-                            x_range=(x_min, x_max),
-                            y_range=(y_min, y_max),
-                            color_tolerance=color_tolerance,
-                            verbose=False,
-                        )
-
-                        if results.get("curves"):
-                            st.success(f"Detected {len(results['curves'])} curve(s)")
-
-                            # Plot the extracted curves
-                            fig, ax = plt.subplots(figsize=(10, 6))
-                            colors = ['#1f77b4', '#d62728', '#2ca02c', '#ff7f0e', '#9467bd']
-
-                            for i, curve in enumerate(results["curves"]):
-                                t = np.array(curve["eval_times"])
-                                s = np.array(curve["eval_survival"])
-                                c = colors[i % len(colors)]
-                                label = curve.get("label", f"Curve {i+1}")
-                                ax.step(t, s, where="post", color=c, linewidth=2, label=label)
-
-                            ax.set_xlabel("Time")
-                            ax.set_ylabel("Survival Probability")
-                            ax.set_title("Digitized Curves")
-                            ax.legend()
-                            ax.set_xlim(x_min, x_max)
-                            ax.set_ylim(y_min, y_max)
-                            ax.grid(True, alpha=0.2)
-                            st.pyplot(fig)
-                            plt.close(fig)
-
-                            # Data table
-                            st.subheader("Extracted Data")
-                            for i, curve in enumerate(results["curves"]):
-                                label = curve.get("label", f"Curve {i+1}")
-                                with st.expander(f"Curve: {label}"):
-                                    import pandas as pd
-                                    df = pd.DataFrame({
-                                        "Time": curve["eval_times"],
-                                        "Survival": [f"{v:.4f}" for v in curve["eval_survival"]],
-                                    })
-                                    st.dataframe(df, use_container_width=True, height=300)
-
-                                    # Download button
-                                    csv = df.to_csv(index=False)
-                                    st.download_button(
-                                        f"Download CSV ({label})",
-                                        csv,
-                                        f"km_curve_{label}.csv",
-                                        "text/csv",
-                                    )
-                        else:
-                            st.warning("No curves detected. Try adjusting the color tolerance or axis ranges.")
-
-                    except Exception as e:
-                        st.error(f"Error: {e}")
-                    finally:
-                        Path(tmp_path).unlink(missing_ok=True)
-
-        else:
-            api_key = st.text_input("Anthropic API Key", type="password")
-            if st.button("Digitize", type="primary"):
-                if not api_key:
-                    st.error("Please provide an API key.")
-                else:
-                    import tempfile
-                    import os
-                    os.environ["ANTHROPIC_API_KEY"] = api_key
-
-                    from src.digitizer import KMDigitizer
-
-                    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
-                        tmp.write(uploaded.getvalue())
-                        tmp_path = tmp.name
-
-                    with st.spinner("Running hybrid LLM+CV extraction..."):
-                        try:
-                            digitizer = KMDigitizer(verbose=False)
-                            results = digitizer.digitize(tmp_path)
-
-                            if results.get("curves"):
-                                st.success(f"Detected {len(results['curves'])} curve(s)")
-
-                                fig, ax = plt.subplots(figsize=(10, 6))
-                                colors = ['#1f77b4', '#d62728', '#2ca02c', '#ff7f0e', '#9467bd']
-
-                                for i, curve in enumerate(results["curves"]):
-                                    t = np.array(curve["eval_times"])
-                                    s = np.array(curve["eval_survival"])
-                                    c = colors[i % len(colors)]
-                                    label = curve.get("label", f"Curve {i+1}")
-                                    ax.step(t, s, where="post", color=c, linewidth=2, label=label)
-
-                                ax.set_xlabel("Time")
-                                ax.set_ylabel("Survival Probability")
-                                ax.set_title("Digitized Curves")
-                                ax.legend()
-                                ax.grid(True, alpha=0.2)
-                                st.pyplot(fig)
-                                plt.close(fig)
-
-                                # Metadata from LLM
-                                if results.get("metadata"):
-                                    with st.expander("LLM Metadata"):
-                                        st.json(results["metadata"])
-
-                                # Data table
-                                st.subheader("Extracted Data")
-                                for i, curve in enumerate(results["curves"]):
-                                    label = curve.get("label", f"Curve {i+1}")
-                                    with st.expander(f"Curve: {label}"):
-                                        import pandas as pd
-                                        df = pd.DataFrame({
-                                            "Time": curve["eval_times"],
-                                            "Survival": [f"{v:.4f}" for v in curve["eval_survival"]],
-                                        })
-                                        st.dataframe(df, use_container_width=True, height=300)
-                                        csv = df.to_csv(index=False)
-                                        st.download_button(
-                                            f"Download CSV ({label})",
-                                            csv,
-                                            f"km_curve_{label}.csv",
-                                            "text/csv",
-                                        )
-                            else:
-                                st.warning("No curves detected.")
-
-                        except Exception as e:
-                            st.error(f"Error: {e}")
-                        finally:
-                            Path(tmp_path).unlink(missing_ok=True)
