@@ -1,7 +1,7 @@
 {
   "n_plots": 40,
   "n_errors": 0,
-  "mean_timing": 0.050778317451477054,
+  "mean_timing": 0.04839552640914917,
   "errors": [],
   "results": [
     {
@@ -35,7 +35,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_000",
-      "timing": 0.08050894737243652
+      "timing": 0.0798189640045166
     },
     {
       "per_curve": [
@@ -68,7 +68,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_001",
-      "timing": 0.03477215766906738
+      "timing": 0.0332949161529541
     },
     {
       "per_curve": [
@@ -101,7 +101,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_002",
-      "timing": 0.03508901596069336
+      "timing": 0.0335543155670166
     },
     {
       "per_curve": [
@@ -134,7 +134,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_003",
-      "timing": 0.0354917049407959
+      "timing": 0.03299593925476074
     },
     {
       "per_curve": [
@@ -167,7 +167,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_004",
-      "timing": 0.015106916427612305
+      "timing": 0.014927864074707031
     },
     {
       "per_curve": [
@@ -200,7 +200,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_005",
-      "timing": 0.017536163330078125
+      "timing": 0.016875743865966797
     },
     {
       "per_curve": [
@@ -233,7 +233,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_006",
-      "timing": 0.06060600280761719
+      "timing": 0.06765484809875488
     },
     {
       "per_curve": [
@@ -266,7 +266,7 @@
         "n_curves_expected": 1
       },
       "name": "easy_007",
-      "timing": 0.06114482879638672
+      "timing": 0.058319807052612305
     },
     {
       "per_curve": [
@@ -313,7 +313,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_008",
-      "timing": 0.028085708618164062
+      "timing": 0.02971792221069336
     },
     {
       "per_curve": [
@@ -360,7 +360,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_009",
-      "timing": 0.05624699592590332
+      "timing": 0.05454373359680176
     },
     {
       "per_curve": [
@@ -407,7 +407,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_010",
-      "timing": 0.0989389419555664
+      "timing": 0.0953061580657959
     },
     {
       "per_curve": [
@@ -454,7 +454,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_011",
-      "timing": 0.03312087059020996
+      "timing": 0.029185056686401367
     },
     {
       "per_curve": [
@@ -501,7 +501,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_012",
-      "timing": 0.027758121490478516
+      "timing": 0.02435898780822754
     },
     {
       "per_curve": [
@@ -548,7 +548,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_ci_013",
-      "timing": 0.07100701332092285
+      "timing": 0.05663800239562988
     },
     {
       "per_curve": [
@@ -595,7 +595,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_ci_014",
-      "timing": 0.05794405937194824
+      "timing": 0.05253720283508301
     },
     {
       "per_curve": [
@@ -642,7 +642,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_ci_015",
-      "timing": 0.06329822540283203
+      "timing": 0.05593705177307129
     },
     {
       "per_curve": [
@@ -689,7 +689,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_atrisk_016",
-      "timing": 0.05832791328430176
+      "timing": 0.05192399024963379
     },
     {
       "per_curve": [
@@ -736,7 +736,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_atrisk_017",
-      "timing": 0.057582855224609375
+      "timing": 0.0521390438079834
     },
     {
       "per_curve": [
@@ -783,7 +783,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_atrisk_018",
-      "timing": 0.05909299850463867
+      "timing": 0.05386805534362793
     },
     {
       "per_curve": [
@@ -830,7 +830,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_atrisk_019",
-      "timing": 0.05862689018249512
+      "timing": 0.0530240535736084
     },
     {
       "per_curve": [
@@ -877,7 +877,7 @@
         "n_curves_expected": 2
       },
       "name": "medium_atrisk_020",
-      "timing": 0.05928397178649902
+      "timing": 0.0536341667175293
     },
     {
       "per_curve": [
@@ -924,7 +924,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_trunc_021",
-      "timing": 0.04528093338012695
+      "timing": 0.045020103454589844
     },
     {
       "per_curve": [
@@ -971,7 +971,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_trunc_022",
-      "timing": 0.04766106605529785
+      "timing": 0.04602503776550293
     },
     {
       "per_curve": [
@@ -1014,7 +1014,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_trunc_023",
-      "timing": 0.045053720474243164
+      "timing": 0.04396486282348633
     },
     {
       "per_curve": [
@@ -1061,7 +1061,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_trunc_024",
-      "timing": 0.05192089080810547
+      "timing": 0.05201911926269531
     },
     {
       "per_curve": [
@@ -1108,7 +1108,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_trunc_025",
-      "timing": 0.05331683158874512
+      "timing": 0.050065040588378906
     },
     {
       "per_curve": [
@@ -1155,7 +1155,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_lowres_026",
-      "timing": 0.005656003952026367
+      "timing": 0.005717039108276367
     },
     {
       "per_curve": [
@@ -1202,7 +1202,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_lowres_027",
-      "timing": 0.00625300407409668
+      "timing": 0.006263017654418945
     },
     {
       "per_curve": [
@@ -1249,7 +1249,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_lowres_028",
-      "timing": 0.00648808479309082
+      "timing": 0.0064868927001953125
     },
     {
       "per_curve": [
@@ -1310,7 +1310,7 @@
         "n_curves_expected": 3
       },
       "name": "hard_three_029",
-      "timing": 0.07717013359069824
+      "timing": 0.07746624946594238
     },
     {
       "per_curve": [
@@ -1371,7 +1371,7 @@
         "n_curves_expected": 3
       },
       "name": "hard_three_030",
-      "timing": 0.07263517379760742
+      "timing": 0.07233023643493652
     },
     {
       "per_curve": [
@@ -1432,7 +1432,7 @@
         "n_curves_expected": 3
       },
       "name": "hard_three_031",
-      "timing": 0.08591675758361816
+      "timing": 0.07143497467041016
     },
     {
       "per_curve": [
@@ -1479,7 +1479,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_032",
-      "timing": 0.05951070785522461
+      "timing": 0.05784201622009277
     },
     {
       "per_curve": [
@@ -1526,7 +1526,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_033",
-      "timing": 0.054785966873168945
+      "timing": 0.05251908302307129
     },
     {
       "per_curve": [
@@ -1573,7 +1573,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_034",
-      "timing": 0.05963706970214844
+      "timing": 0.05695223808288574
     },
     {
       "per_curve": [
@@ -1620,7 +1620,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_035",
-      "timing": 0.06021285057067871
+      "timing": 0.059635162353515625
     },
     {
       "per_curve": [
@@ -1667,7 +1667,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_036",
-      "timing": 0.05734109878540039
+      "timing": 0.06409621238708496
     },
     {
       "per_curve": [
@@ -1714,7 +1714,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_037",
-      "timing": 0.05639290809631348
+      "timing": 0.05604887008666992
     },
     {
       "per_curve": [
@@ -1761,7 +1761,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_038",
-      "timing": 0.05798006057739258
+      "timing": 0.0556948184967041
     },
     {
       "per_curve": [
@@ -1808,7 +1808,7 @@
         "n_curves_expected": 2
       },
       "name": "hard_overlap_039",
-      "timing": 0.0583491325378418
+      "timing": 0.0559842586517334
     }
   ]
 }
