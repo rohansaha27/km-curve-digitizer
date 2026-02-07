@@ -1,0 +1,144 @@
+{
+  "description": "Real-world KM plot annotations for benchmark evaluation. Ground truth values are taken from the published paper text and figure legends.",
+  "sources": [
+    {
+      "id": "rcc_all",
+      "image": "rcc_fig001.png",
+      "paper": "Disease-Specific Survival in De Novo Metastatic Renal Cell Carcinoma",
+      "doi": "10.1371/journal.pone.0063341",
+      "journal": "PLOS ONE",
+      "description": "Stage IV RCC disease-specific survival by time period (all histologies)",
+      "x_range": [0, 60],
+      "y_range": [0.0, 1.0],
+      "x_label": "Disease Specific Survival (Months)",
+      "y_label": "Survival Probability",
+      "curves": [
+        {
+          "label": "1992-2004",
+          "color": "#8B0000",
+          "n_subjects": 2392,
+          "reported_median_survival": 13,
+          "reported_survival_at": {
+            "12": 0.52,
+            "60": 0.18
+          }
+        },
+        {
+          "label": "2005-2009",
+          "color": "#00008B",
+          "n_subjects": 2784,
+          "reported_median_survival": 16,
+          "reported_survival_at": {
+            "12": 0.57,
+            "60": 0.22
+          }
+        }
+      ],
+      "difficulty": "medium",
+      "notes": "Classic 2-arm KM plot, similar dark red/blue colors. Values in legend."
+    },
+    {
+      "id": "rcc_clear_cell",
+      "image": "rcc_fig002.png",
+      "paper": "Disease-Specific Survival in De Novo Metastatic Renal Cell Carcinoma",
+      "doi": "10.1371/journal.pone.0063341",
+      "journal": "PLOS ONE",
+      "description": "Stage IV Clear Cell RCC disease-specific survival",
+      "x_range": [0, 60],
+      "y_range": [0.0, 1.0],
+      "x_label": "Disease Specific Survival (Months)",
+      "y_label": "Survival Probability",
+      "curves": [
+        {
+          "label": "1992-2004",
+          "color": "#8B0000",
+          "n_subjects": 2202,
+          "reported_median_survival": 13,
+          "reported_survival_at": {
+            "12": 0.52,
+            "60": 0.17
+          }
+        },
+        {
+          "label": "2005-2009",
+          "color": "#00008B",
+          "n_subjects": 2505,
+          "reported_median_survival": 16,
+          "reported_survival_at": {
+            "12": 0.57,
+            "60": 0.21
+          }
+        }
+      ],
+      "difficulty": "medium",
+      "notes": "Similar to fig001 but Clear Cell histology only."
+    },
+    {
+      "id": "rcc_non_clear",
+      "image": "rcc_fig003.png",
+      "paper": "Disease-Specific Survival in De Novo Metastatic Renal Cell Carcinoma",
+      "doi": "10.1371/journal.pone.0063341",
+      "journal": "PLOS ONE",
+      "description": "Stage IV Non-Clear Cell RCC disease-specific survival",
+      "x_range": [0, 60],
+      "y_range": [0.0, 1.0],
+      "x_label": "Disease Specific Survival (Months)",
+      "y_label": "Survival Probability",
+      "curves": [
+        {
+          "label": "1992-2004",
+          "color": "#8B0000",
+          "n_subjects": 190,
+          "reported_median_survival": 12,
+          "reported_survival_at": {
+            "12": 0.49,
+            "60": 0.22
+          }
+        },
+        {
+          "label": "2005-2009",
+          "color": "#00008B",
+          "n_subjects": 279,
+          "reported_median_survival": 14,
+          "reported_survival_at": {
+            "12": 0.56,
+            "60": 0.27
+          }
+        }
+      ],
+      "difficulty": "hard",
+      "notes": "Closely overlapping curves from smaller cohorts. Harder to distinguish."
+    },
+    {
+      "id": "ntrk_os_a",
+      "image": "ntrk_fig002.png",
+      "paper": "Real-world survival outcomes in patients with NTRK fusion-positive solid tumors",
+      "doi": "10.1371/journal.pone.0270571",
+      "journal": "PLOS ONE",
+      "description": "Overall survival NTRK- vs NTRK+ (Panel A - primary analysis), with risk table",
+      "x_range": [0, 36],
+      "y_range": [0.0, 1.0],
+      "x_label": "Time (months)",
+      "y_label": "OS (%)",
+      "y_scale_percent": true,
+      "multi_panel": true,
+      "panel": "A",
+      "curves": [
+        {
+          "label": "NTRK-",
+          "color": "#0000CC",
+          "reported_median_survival": null,
+          "reported_survival_at": {}
+        },
+        {
+          "label": "NTRK+",
+          "color": "#CC0000",
+          "reported_median_survival": null,
+          "reported_survival_at": {}
+        }
+      ],
+      "difficulty": "hard",
+      "notes": "Multi-panel figure with risk tables. Y-axis in percentage. Censoring marks visible. Panel A only."
+    }
+  ]
+}

@@ -26,29 +26,58 @@ A **CV-only mode** is also available for use without an API key, using heuristic
 
 ## Benchmark Results
 
-Evaluated on 40 synthetic KM plots across three difficulty levels:
+### Synthetic Data (200 plots, `--size large`)
 
-### Overall Performance (CV pipeline, ground truth axis/color hints)
+Evaluated on **200 diverse synthetic KM plots** across three difficulty levels, covering single/multi-arm curves, confidence intervals, truncated y-axes, low resolution, and closely overlapping curves.
+
+#### Overall Performance (CV pipeline, ground truth axis/color hints)
 
 | Metric | Value |
 |--------|-------|
-| **Mean MAE** | **0.0085** (±0.0037) |
-| **Mean RMSE** | 0.0107 (±0.0046) |
-| **Mean CCC** | **0.9969** (±0.0055) |
-| **Mean R-squared** | 0.9940 (±0.0109) |
-| **Accuracy @3%** | 97.8% |
-| **Accuracy @5%** | **99.6%** |
-| **Accuracy @10%** | **100.0%** |
+| **Mean MAE** | **0.0091** (±0.0050) |
+| **Median MAE** | **0.0073** |
+| **Mean RMSE** | 0.0112 (±0.0070) |
+| **Mean IAE** | **0.0091** (±0.0050) |
+| **Median IAE** | **0.0074** |
+| **Mean CCC** | **0.9944** (±0.0190) |
+| **Accuracy @3%** | 96.6% |
+| **Accuracy @5%** | **99.5%** |
+| **Accuracy @10%** | **99.9%** |
 
-### Performance by Difficulty
+#### Performance by Difficulty
 
-| Difficulty | Plots | Mean MAE | Acc @5% | Mean CCC |
-|-----------|-------|----------|---------|----------|
-| Easy (single curve, clean) | 8 | 0.0083 | 99.9% | 0.9989 |
-| Medium (2 curves, CIs, various colors) | 13 | 0.0064 | 100.0% | 0.9992 |
-| Hard (truncated y, low-res, 3 curves, overlap) | 19 | 0.0100 | 99.3% | 0.9946 |
+| Difficulty | Plots | Median MAE | Acc @5% | Mean CCC |
+|-----------|-------|------------|---------|----------|
+| Easy (single curve, clean) | 40 | 0.0072 | 99.1% | 0.9980 |
+| Medium (2 curves, CIs, at-risk tables) | 80 | 0.0068 | 99.9% | 0.9986 |
+| Hard (truncated y, low-res, 3 curves, overlap) | 80 | 0.0092 | 99.4% | 0.9883 |
 
-All 40 plots achieve MAE < 0.025 and CCC > 0.96. The worst-case plot (hard_trunc_021) has MAE = 0.021.
+#### Comparison with KM-GPT Paper
+
+| Metric | Ours (median) | KM-GPT (median) | Notes |
+|--------|--------------|-----------------|-------|
+| **Point-wise AE** | **0.0073** | 0.005 | Comparable; theirs tested on single-arm only |
+| **Integrated AE (IAE)** | **0.0074** | 0.018 | **Ours is 2.4x better** |
+| **Median Surv. Error** | **~0.005 normalized** | 0.005 normalized | **Match** (ours: 0.26 months / 48mo range) |
+
+> KM-GPT was evaluated on 538 single-arm synthetic curves. Our benchmark uses 200 plots with substantially harder conditions: multi-arm plots (2-3 curves), confidence interval bands, truncated y-axes, low resolution (72 DPI), and closely overlapping curves.
+
+### Real-World Published Data
+
+Evaluated on **4 KM plots from open-access published clinical papers** (PLOS ONE), comparing digitized values against survival statistics reported in the papers.
+
+| Metric | Value |
+|--------|-------|
+| **Mean Median Survival Error** | **1.45 months** |
+| **Median Survival Relative Error** | **10.3%** |
+| **Mean Timepoint Abs Error** | **0.032** (3.2% on survival probability) |
+| **Curve Detection Rate** | **100%** (8/8 curves across 4 plots) |
+
+Sources used:
+- **Stage IV RCC** (10.1371/journal.pone.0063341): 3 figures with reported median survival, 1-year and 5-year survival rates
+- **NTRK fusion tumors** (10.1371/journal.pone.0270571): OS curves with risk tables and censoring marks
+
+Run the real-world benchmark: `python run_real_world_benchmark.py`
 
 ## Installation
 
@@ -95,59 +124,80 @@ results = digitize_cv_only(
 ### Command line
 
 ```bash
-# Generate synthetic benchmark data (no API key needed)
-python run_benchmark.py --generate-only
-
-# Run benchmark with CV-only mode (no API key needed)
+# Run synthetic benchmark (default: 40 plots, no API key needed)
 python run_benchmark.py --cv-only
 
-# Run benchmark with hybrid LLM+CV mode
+# Run large benchmark (200 plots)
+python run_benchmark.py --cv-only --size large
+
+# Run XL benchmark (500 plots, publication-grade)
+python run_benchmark.py --cv-only --size xl
+
+# Run real-world benchmark
+python run_real_world_benchmark.py
+
+# Generate synthetic data only (no API key needed)
+python run_benchmark.py --generate-only --size large
+
+# Run benchmark with hybrid LLM+CV mode (requires API key)
 python run_benchmark.py
 
 # Digitize a single image
 python run_benchmark.py --single path/to/km_plot.png --verbose
-
-# Run with limited plots for quick testing
-python run_benchmark.py --max-plots 5 --verbose
 ```
 
 ## Benchmark Details
 
-The benchmark suite generates **40 synthetic KM plots** with known ground truth:
+### Synthetic Data
 
-### Difficulty Levels
+The benchmark suite generates synthetic KM plots with known ground truth, configurable in size:
 
-| Level | Count | Characteristics |
-|-------|-------|----------------|
-| **Easy** | 8 | Single curve, various colors (blue/red/green/orange/purple/brown/pink/cyan), optional censoring marks and grid |
-| **Medium** | 13 | Two curves with 5 different color pairs, confidence intervals, number-at-risk tables, censoring marks |
-| **Hard** | 19 | Truncated y-axis (starting at 0.2-0.5), low resolution (72 DPI at 4x3"), three overlapping curves, closely separated curves with CIs |
+| Size Flag | Plots | Description |
+|-----------|-------|-------------|
+| `--size small` | 20 | Quick smoke test |
+| `--size default` | 40 | Standard benchmark |
+| `--size large` | 200 | Rigorous evaluation |
+| `--size xl` | 500 | Publication-grade evaluation |
 
-### Edge Cases Covered
+#### Difficulty Levels
 
-- **Truncated y-axis**: Y-axis starting at 0.2-0.5 (common in real papers)
+| Level | Characteristics |
+|-------|----------------|
+| **Easy** | Single curve, various colors, optional censoring/grid |
+| **Medium** | Two curves (8 color pairs), CIs, at-risk tables |
+| **Hard** | Truncated y-axis (0.2-0.6 start), low resolution (72 DPI), three overlapping curves, closely separated curves with CIs |
+
+#### Edge Cases Covered
+
+- **Truncated y-axis**: Y-axis starting at 0.2-0.6 (common in real papers)
 - **Low resolution**: 72 DPI, 4x3 inch figures (simulating scanned documents)
 - **Multiple overlapping curves**: Up to 3 curves with potential intersections
-- **Closely separated curves**: Curves with <15% difference in median survival
+- **Closely separated curves**: Curves with <20% difference in median survival
 - **Confidence intervals**: Shaded CI bands that can confuse color detection
 - **Censoring marks**: Tick marks on curves
 - **Number-at-risk tables**: Tables below the plot
 - **Grid lines**: Background grid
 - **Various Weibull shapes**: Exponential and non-exponential hazard functions
-- **Black curves**: That can interfere with axis detection
-- **Brown/pastel colors**: That are harder to detect
+- **Dark/similar colors**: Black, dark brown, gray -- colors that can interfere with axes
 
 ### Evaluation Metrics
 
-| Metric | Description |
-|--------|-------------|
-| **MAE** | Mean Absolute Error of survival probabilities at 200 evenly-spaced time points |
-| **RMSE** | Root Mean Squared Error |
-| **IAE** | Integrated Absolute Error (area between curves, normalized) |
-| **CCC** | Lin's Concordance Correlation Coefficient (agreement) |
-| **R-squared** | Coefficient of determination |
-| **Accuracy@N%** | Fraction of time points with absolute error less than N% |
-| **Median Survival Error** | Absolute error in estimated median survival time |
+| Metric | Description | Matches KM-GPT |
+|--------|-------------|-----------------|
+| **MAE** | Mean Absolute Error of survival probabilities at 200 evenly-spaced time points | ~ Point-wise AE |
+| **IAE** | Integrated Absolute Error (area between curves, normalized by time span) | Yes, directly comparable |
+| **CCC** | Lin's Concordance Correlation Coefficient (agreement measure) | |
+| **Accuracy@N%** | Fraction of time points with absolute error less than N% | |
+| **Median Survival Error** | Absolute error in estimated median survival time | ~ AE in median OS |
+| **RMSE** | Root Mean Squared Error | |
+| **R-squared** | Coefficient of determination | |
+
+### Real-World Data
+
+The real-world benchmark evaluates on published KM plots from open-access journals. Since pixel-level ground truth is unavailable, evaluation uses:
+1. **Reported median survival** from the paper text/legends
+2. **Reported survival rates** at key time points (1-year, 5-year, etc.)
+3. **Visual overlay** comparison of digitized curves on the original figure
 
 ## Architecture
 
@@ -161,6 +211,9 @@ src/
 ├── synthesizer.py         # Synthetic benchmark generation
 ├── metrics.py             # Evaluation metrics
 └── utils.py               # Shared utilities
+
+run_benchmark.py               # Synthetic data benchmark runner
+run_real_world_benchmark.py     # Real-world published data benchmark
 ```
 
 ### Pipeline Flow
@@ -219,11 +272,25 @@ Input Image
 
 6. **Truncated axis handling**: The evaluation framework correctly handles truncated y-axes by clipping ground truth to the visible range, reflecting the physical limitation that the digitizer can only extract what's visible.
 
+## LLM Cost Estimate
+
+Using Claude Sonnet 4 ($3/M input, $15/M output tokens):
+
+| Scenario | Images | Estimated Cost |
+|----------|--------|----------------|
+| Quick test (default benchmark) | 40 | ~$0.70 |
+| Rigorous benchmark (large) | 200 | ~$3.40 |
+| Publication benchmark (xl) | 500 | ~$8.50 |
+| Typical systematic review | 50-100 | ~$1-2 |
+
+The LLM is only needed for real-world images where axis ranges and curve colors are unknown. The CV-only mode is free (no API calls).
+
 ## Limitations
 
 - Requires an Anthropic API key (Claude) for the hybrid LLM component (CV-only mode available)
 - Performance may degrade on extremely compressed JPEG images
 - May struggle with non-standard plot styles (hand-drawn, unusual color schemes)
-- Curves with very similar colors (e.g., light blue vs cyan) may be confused
+- Curves with very similar colors (e.g., dark red vs dark blue on same plot) may show ~5% reduced accuracy
 - Does not currently extract confidence interval bounds as separate data series
 - CV-only mode requires user-provided axis ranges for real-world images
+- Multi-panel figures require manual cropping to individual panels

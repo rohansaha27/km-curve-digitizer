@@ -43,5 +43,5 @@
     "n_curves_expected": 2
   },
   "name": "hard_trunc_128",
-  "timing": 0.05058622360229492
+  "timing": 0.06046104431152344
 }
