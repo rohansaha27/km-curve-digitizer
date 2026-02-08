@@ -4,6 +4,4 @@ matplotlib>=3.8
 pillow>=10.0
 pandas>=2.0
 scipy>=1.10
-
-# Optional (only needed for truncated y-axis OCR calibration):
 pytesseract>=0.3.10

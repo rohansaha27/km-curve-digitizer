@@ -1,3 +1,17 @@
+Metadata-Version: 2.4
+Name: km-digitizer
+Version: 0.1.0
+Summary: Automated Kaplan-Meier curve digitization + synthetic benchmark
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: opencv-python>=4.8
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: pillow>=10.0
+Requires-Dist: pandas>=2.0
+Requires-Dist: scipy>=1.10
+Requires-Dist: pytesseract>=0.3.10
+
 # km-digitizer
 
 Automated digitization of Kaplan–Meier (KM) plots from images using classical CV:
