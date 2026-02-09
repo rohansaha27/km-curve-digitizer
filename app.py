@@ -146,35 +146,36 @@ elif page == "Run Benchmark":
 
     # --- Synthetic ---
     with tab_synth:
-        st.markdown("Generate synthetic KM plots and evaluate the CV digitizer against known ground truth.")
+        st.markdown("Generate synthetic KM plots and evaluate the digitizer against known ground truth.")
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
         with col1:
             size = st.selectbox("Benchmark size", ["small (22)", "default (45)", "large (220)", "xl (550)"], index=1)
             size_flag = size.split(" ")[0]
         with col2:
-            use_gt_hints = st.checkbox(
-                "Use GT hints (axis + colors from JSON)",
-                value=True,
-                help="If unchecked, the digitizer auto-detects axes and curve colors from the image (no JSON).",
+            use_hybrid = st.checkbox(
+                "Use hybrid (LLM+CV)",
+                value=False,
+                help="Use Claude vision to read axes and curve colors, then CV to trace. Requires ANTHROPIC_API_KEY in .env.",
             )
-        with col3:
-            regen = st.checkbox("Regenerate data (delete existing)", value=False)
+            if not use_hybrid:
+                use_gt_hints = st.checkbox(
+                    "Use GT hints (axis + colors from JSON)",
+                    value=True,
+                    help="If unchecked, CV auto-detects axes and colors from the image (no JSON).",
+                )
 
         if st.button("Run Synthetic Benchmark", type="primary"):
-            if regen and SYNTH_DIR.exists():
-                import shutil
-                shutil.rmtree(SYNTH_DIR, ignore_errors=True)
-                if RESULTS_DIR.exists():
-                    shutil.rmtree(RESULTS_DIR, ignore_errors=True)
-                st.info("Cleared existing data.")
-
             cmd = [
                 sys.executable, "run_benchmark.py",
-                "--cv-auto" if not use_gt_hints else "--cv-only",
                 "--size", size_flag,
             ]
-            if not regen and _benchmark_exists(SYNTH_DIR):
+            if use_hybrid:
+                # No --cv-only or --cv-auto → hybrid LLM+CV
+                pass
+            else:
+                cmd.append("--cv-auto" if not use_gt_hints else "--cv-only")
+            if _benchmark_exists(SYNTH_DIR):
                 cmd.append("--skip-generate")
 
             st.info(f"Running: `{' '.join(cmd)}`")
