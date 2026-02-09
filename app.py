@@ -96,7 +96,7 @@ def _delete_generated_data() -> Tuple[int, str]:
 st.sidebar.title("KM Curve Digitizer")
 page = st.sidebar.radio(
     "Navigate",
-    ["Overview", "Run Benchmark", "Synthetic Results", "Real-World Results", "Digitize Single Image"],
+    ["Overview", "Run Benchmark", "Synthetic Results", "Real-World Results"],
     index=0,
 )
 
@@ -131,66 +131,6 @@ if page == "Overview":
             st.subheader("Latest Synthetic Benchmark Report")
             st.code(report_path.read_text(), language="text")
 
-
-# ===================================================================
-# PAGE: Digitize Single Image
-# ===================================================================
-elif page == "Digitize Single Image":
-    st.title("Digitize Single Image")
-    st.markdown("Upload a KM curve plot image to extract survival data using the hybrid LLM + CV pipeline.")
-
-    uploaded = st.file_uploader("Choose a KM plot image", type=["png", "jpg", "jpeg"], key="single_image")
-    if uploaded is not None:
-        st.image(uploaded, caption="Uploaded image", width="stretch", max_width=600)
-
-    if st.button("Digitize", type="primary", disabled=(uploaded is None)):
-        if uploaded is None:
-            st.warning("Upload an image first.")
-        else:
-            import tempfile
-            from src.digitizer import KMDigitizer
-
-            with st.spinner("Digitizing..."):
-                with tempfile.NamedTemporaryFile(suffix=Path(uploaded.name).suffix, delete=False) as tmp:
-                    tmp.write(uploaded.getvalue())
-                    tmp_path = tmp.name
-                try:
-                    digitizer = KMDigitizer(verbose=False)
-                    results = digitizer.digitize(tmp_path)
-                    curves = results.get("curves", [])
-                    Path(tmp_path).unlink(missing_ok=True)
-                except Exception as e:
-                    Path(tmp_path).unlink(missing_ok=True)
-                    st.error(f"Digitization failed: {e}")
-                    if "API" in str(e) or "anthropic" in str(e).lower():
-                        st.info("Set `ANTHROPIC_API_KEY` for hybrid mode, or use CV-only from CLI: `python -m src.digitize_single image.png`")
-                    st.stop()
-
-            st.success(f"Extracted **{len(curves)}** curve(s).")
-            for i, c in enumerate(curves):
-                label = c.get("label", f"Curve {i+1}")
-                n_pts = len(c.get("eval_times", []))
-                st.metric(label, f"{n_pts} points")
-
-            out = {
-                "curves": [
-                    {
-                        "label": c.get("label", f"Curve {i+1}"),
-                        "eval_times": c.get("eval_times", []),
-                        "eval_survival": c.get("eval_survival", []),
-                        "step_times": c.get("step_times", []),
-                        "step_survival": c.get("step_survival", []),
-                    }
-                    for i, c in enumerate(curves)
-                ],
-                "metadata": results.get("metadata", {}),
-            }
-            st.download_button(
-                "Download results (JSON)",
-                data=json.dumps(out, indent=2),
-                file_name=Path(uploaded.name).stem + "_digitized.json",
-                mime="application/json",
-            )
 
 # ===================================================================
 # PAGE: Run Benchmark
