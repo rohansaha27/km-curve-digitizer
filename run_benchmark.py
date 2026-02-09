@@ -70,9 +70,9 @@ def parse_args():
     parser.add_argument('--color-tolerance', type=float, default=35.0,
                         help='Color matching tolerance for CV extraction')
     parser.add_argument('--cv-only', action='store_true',
-                        help='Use CV-only mode (no LLM, uses ground truth hints for axis/color)')
+                        help='Use CV-only mode with ground truth hints (axis ranges + curve colors from JSON)')
     parser.add_argument('--cv-auto', action='store_true',
-                        help='Use fully automatic CV-only mode (no LLM, no ground truth hints)')
+                        help='CV-only with no hints: auto-detect axes and curve colors from the image (no JSON)')
     parser.add_argument('--size', type=str, default='default',
                         choices=['small', 'default', 'large', 'xl'],
                         help='Benchmark size: small(22), default(45), large(220), xl(550)')
@@ -204,11 +204,9 @@ def run_benchmark(
                     verbose=verbose,
                 )
             elif cv_auto:
-                # Use ground truth ranges but auto-detect colors
+                # No ground truth hints: auto-detect plot bbox, axis ranges, and curve colors from image
                 dig_results = digitize_cv_only(
                     image_path,
-                    x_range=tuple(gt['x_range']),
-                    y_range=tuple(gt['y_range']),
                     color_tolerance=color_tolerance,
                     verbose=verbose,
                 )

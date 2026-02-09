@@ -100,6 +100,14 @@ page = st.sidebar.radio(
     index=0,
 )
 
+with st.sidebar.expander("Delete Generated Data"):
+    st.caption("Remove all synthetic data and results. Directories kept.")
+    confirm = st.checkbox("I want to delete all", key="delete_confirm")
+    if st.button("Delete all", type="secondary", disabled=not confirm, key="delete_btn"):
+        n_removed, msg = _delete_generated_data()
+        st.success(msg)
+        st.rerun()
+
 # ===================================================================
 # PAGE: Overview
 # ===================================================================
@@ -123,15 +131,6 @@ if page == "Overview":
             st.subheader("Latest Synthetic Benchmark Report")
             st.code(report_path.read_text(), language="text")
 
-    st.divider()
-    with st.expander("🗑️ Delete all generated data"):
-        st.caption("Permanently remove all synthetic benchmark images, ground truth, and result files. Directories are kept. Use this to free space or start fresh.")
-        confirm = st.checkbox("I want to delete all synthetic data and results", key="delete_confirm")
-        if st.button("Delete all", type="secondary", disabled=not confirm, key="delete_btn"):
-            n_removed, msg = _delete_generated_data()
-            st.success(msg)
-            st.rerun()
-
 
 # ===================================================================
 # PAGE: Digitize Single Image
@@ -142,7 +141,7 @@ elif page == "Digitize Single Image":
 
     uploaded = st.file_uploader("Choose a KM plot image", type=["png", "jpg", "jpeg"], key="single_image")
     if uploaded is not None:
-        st.image(uploaded, caption="Uploaded image", use_container_width=True, max_width=600)
+        st.image(uploaded, caption="Uploaded image", width="stretch", max_width=600)
 
     if st.button("Digitize", type="primary", disabled=(uploaded is None)):
         if uploaded is None:
@@ -205,11 +204,17 @@ elif page == "Run Benchmark":
     with tab_synth:
         st.markdown("Generate synthetic KM plots and evaluate the CV digitizer against known ground truth.")
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             size = st.selectbox("Benchmark size", ["small (22)", "default (45)", "large (220)", "xl (550)"], index=1)
             size_flag = size.split(" ")[0]
         with col2:
+            use_gt_hints = st.checkbox(
+                "Use GT hints (axis + colors from JSON)",
+                value=True,
+                help="If unchecked, the digitizer auto-detects axes and curve colors from the image (no JSON).",
+            )
+        with col3:
             regen = st.checkbox("Regenerate data (delete existing)", value=False)
 
         if st.button("Run Synthetic Benchmark", type="primary"):
@@ -222,7 +227,8 @@ elif page == "Run Benchmark":
 
             cmd = [
                 sys.executable, "run_benchmark.py",
-                "--cv-only", "--size", size_flag,
+                "--cv-auto" if not use_gt_hints else "--cv-only",
+                "--size", size_flag,
             ]
             if not regen and _benchmark_exists(SYNTH_DIR):
                 cmd.append("--skip-generate")
@@ -310,10 +316,10 @@ elif page == "Synthetic Results":
         col1, col2 = st.columns(2)
         if agg_path.exists():
             with col1:
-                st.image(str(agg_path), use_container_width=True)
+                st.image(str(agg_path), width="stretch")
         if scatter_path.exists():
             with col2:
-                st.image(str(scatter_path), use_container_width=True)
+                st.image(str(scatter_path), width="stretch")
 
     # --- Per-Plot Comparison Browser ---
     st.subheader("Per-Plot Comparison")
@@ -363,7 +369,7 @@ elif page == "Synthetic Results":
             col_img, col_info = st.columns([3, 1])
 
             with col_img:
-                st.image(str(img_path), caption=name, use_container_width=True)
+                st.image(str(img_path), caption=name, width="stretch")
 
             with col_info:
                 st.markdown(f"**{name}**")
@@ -414,7 +420,7 @@ elif page == "Real-World Results":
         for overlay in overlays:
             name = overlay.stem.replace("_overlay", "")
             st.markdown(f"**{name}**")
-            st.image(str(overlay), use_container_width=True)
+            st.image(str(overlay), width="stretch")
             st.divider()
     else:
         st.info("No overlay images found.")
