@@ -423,7 +423,7 @@ def generate_evaluation_report(
                       f"| 0.005 (norm.)   | Ours ~{norm_err:.4f} normalized")
     lines.append("")
     lines.append("  Context: KM-GPT tested on 538 single-arm synthetic curves.")
-    lines.append("  Our benchmark: 200 plots including multi-arm, CIs, truncated")
+    lines.append("  Our benchmark: Plots including multi-arm, CIs, truncated")
     lines.append("  y-axes, low resolution, closely overlapping curves, and")
     lines.append("  3-curve plots -- substantially harder test conditions.")
     lines.append("")
