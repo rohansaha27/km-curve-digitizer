@@ -19,17 +19,6 @@ A **CV-only mode** is available without an API key (requires manual axis ranges)
 - **Hard:** truncated y-axis, low resolution (DPI 72), three curves, or closely overlapping curves with CIs.
 - **Extreme:** intentionally difficult — similar-color curves (e.g. two blues), heavy image degradation (JPEG compression, blur, noise), or both combined with low res/truncated axis.
 
-| Metric | Value |
-|--------|-------|
-| Median MAE | 0.0073 |
-| Median IAE | 0.0074 |
-| Accuracy @5% | 99.5% |
-| Concordance (CCC) | 0.9944 |
-
-Compared to **KM-GPT** (tested on 538 single-arm curves): our IAE is **2.4x better** (0.0074 vs 0.018) on harder multi-arm conditions.
-
-**Real-world** (4 published PLOS ONE plots): median survival error ~1.5 months, 100% curve detection.
-
 ## Setup
 
 ```bash
@@ -52,22 +41,11 @@ Without a key, benchmarks fall back to CV-only (with or without ground-truth hin
 streamlit run app.py
 ```
 
-**Python:**
-```python
-from src.digitizer import KMDigitizer
-
-results = KMDigitizer().digitize("path/to/km_plot.png")
-
-# CV-only (no API key):
-from src.cv_only_digitizer import digitize_cv_only
-results = digitize_cv_only("plot.png", x_range=(0, 48), y_range=(0, 1))
-```
-
 **CLI:**
 ```bash
 python -m src.digitize_single path/to/km_plot.png   # single image (CV-only, edit axis ranges in script)
-python run_benchmark.py --cv-only                    # default (40 plots)
-python run_benchmark.py --cv-only --size large        # 200 plots
+python run_benchmark.py --cv-only                    # default (45 plots)
+python run_benchmark.py --cv-only --size large        # 205 plots
 python run_real_world_benchmark.py                    # published data
 ```
 
