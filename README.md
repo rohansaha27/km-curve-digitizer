@@ -14,6 +14,10 @@ A **CV-only mode** is available without an API key (requires manual axis ranges)
 
 **Synthetic benchmark** (200 plots -- single/multi-arm, CIs, truncated axes, low-res):
 
+- **Easy:** single curve, full y-axis, clean (optional grid/censor marks).
+- **Medium:** two curves, full y-axis; adds confidence intervals and/or number-at-risk tables.
+- **Hard:** truncated y-axis, low resolution (DPI 72), three curves, or closely overlapping curves with CIs.
+
 | Metric | Value |
 |--------|-------|
 | Median MAE | 0.0073 |

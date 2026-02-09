@@ -50,39 +50,9 @@
     "show_ci": false
   },
   {
-    "name": "easy_005",
-    "image_path": "data/synthetic/easy_005.png",
-    "ground_truth_path": "data/synthetic/easy_005_gt.json",
-    "difficulty": "easy",
-    "n_curves": 1,
-    "y_min": 0.0,
-    "dpi": 100,
-    "show_ci": false
-  },
-  {
-    "name": "easy_006",
-    "image_path": "data/synthetic/easy_006.png",
-    "ground_truth_path": "data/synthetic/easy_006_gt.json",
-    "difficulty": "easy",
-    "n_curves": 1,
-    "y_min": 0.0,
-    "dpi": 200,
-    "show_ci": false
-  },
-  {
-    "name": "easy_007",
-    "image_path": "data/synthetic/easy_007.png",
-    "ground_truth_path": "data/synthetic/easy_007_gt.json",
-    "difficulty": "easy",
-    "n_curves": 1,
-    "y_min": 0.0,
-    "dpi": 200,
-    "show_ci": false
-  },
-  {
-    "name": "medium_008",
-    "image_path": "data/synthetic/medium_008.png",
-    "ground_truth_path": "data/synthetic/medium_008_gt.json",
+    "name": "medium_005",
+    "image_path": "data/synthetic/medium_005.png",
+    "ground_truth_path": "data/synthetic/medium_005_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -90,9 +60,9 @@
     "show_ci": false
   },
   {
-    "name": "medium_009",
-    "image_path": "data/synthetic/medium_009.png",
-    "ground_truth_path": "data/synthetic/medium_009_gt.json",
+    "name": "medium_006",
+    "image_path": "data/synthetic/medium_006.png",
+    "ground_truth_path": "data/synthetic/medium_006_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -100,9 +70,9 @@
     "show_ci": false
   },
   {
-    "name": "medium_010",
-    "image_path": "data/synthetic/medium_010.png",
-    "ground_truth_path": "data/synthetic/medium_010_gt.json",
+    "name": "medium_007",
+    "image_path": "data/synthetic/medium_007.png",
+    "ground_truth_path": "data/synthetic/medium_007_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -110,29 +80,9 @@
     "show_ci": false
   },
   {
-    "name": "medium_011",
-    "image_path": "data/synthetic/medium_011.png",
-    "ground_truth_path": "data/synthetic/medium_011_gt.json",
-    "difficulty": "medium",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 100,
-    "show_ci": false
-  },
-  {
-    "name": "medium_012",
-    "image_path": "data/synthetic/medium_012.png",
-    "ground_truth_path": "data/synthetic/medium_012_gt.json",
-    "difficulty": "medium",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 100,
-    "show_ci": false
-  },
-  {
-    "name": "medium_ci_013",
-    "image_path": "data/synthetic/medium_ci_013.png",
-    "ground_truth_path": "data/synthetic/medium_ci_013_gt.json",
+    "name": "medium_ci_008",
+    "image_path": "data/synthetic/medium_ci_008.png",
+    "ground_truth_path": "data/synthetic/medium_ci_008_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -140,9 +90,9 @@
     "show_ci": true
   },
   {
-    "name": "medium_ci_014",
-    "image_path": "data/synthetic/medium_ci_014.png",
-    "ground_truth_path": "data/synthetic/medium_ci_014_gt.json",
+    "name": "medium_ci_009",
+    "image_path": "data/synthetic/medium_ci_009.png",
+    "ground_truth_path": "data/synthetic/medium_ci_009_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -150,19 +100,9 @@
     "show_ci": true
   },
   {
-    "name": "medium_ci_015",
-    "image_path": "data/synthetic/medium_ci_015.png",
-    "ground_truth_path": "data/synthetic/medium_ci_015_gt.json",
-    "difficulty": "medium",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "medium_atrisk_016",
-    "image_path": "data/synthetic/medium_atrisk_016.png",
-    "ground_truth_path": "data/synthetic/medium_atrisk_016_gt.json",
+    "name": "medium_atrisk_010",
+    "image_path": "data/synthetic/medium_atrisk_010.png",
+    "ground_truth_path": "data/synthetic/medium_atrisk_010_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -170,9 +110,9 @@
     "show_ci": false
   },
   {
-    "name": "medium_atrisk_017",
-    "image_path": "data/synthetic/medium_atrisk_017.png",
-    "ground_truth_path": "data/synthetic/medium_atrisk_017_gt.json",
+    "name": "medium_atrisk_011",
+    "image_path": "data/synthetic/medium_atrisk_011.png",
+    "ground_truth_path": "data/synthetic/medium_atrisk_011_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -180,9 +120,9 @@
     "show_ci": false
   },
   {
-    "name": "medium_atrisk_018",
-    "image_path": "data/synthetic/medium_atrisk_018.png",
-    "ground_truth_path": "data/synthetic/medium_atrisk_018_gt.json",
+    "name": "medium_atrisk_012",
+    "image_path": "data/synthetic/medium_atrisk_012.png",
+    "ground_truth_path": "data/synthetic/medium_atrisk_012_gt.json",
     "difficulty": "medium",
     "n_curves": 2,
     "y_min": 0.0,
@@ -190,29 +130,9 @@
     "show_ci": false
   },
   {
-    "name": "medium_atrisk_019",
-    "image_path": "data/synthetic/medium_atrisk_019.png",
-    "ground_truth_path": "data/synthetic/medium_atrisk_019_gt.json",
-    "difficulty": "medium",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": false
-  },
-  {
-    "name": "medium_atrisk_020",
-    "image_path": "data/synthetic/medium_atrisk_020.png",
-    "ground_truth_path": "data/synthetic/medium_atrisk_020_gt.json",
-    "difficulty": "medium",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": false
-  },
-  {
-    "name": "hard_trunc_021",
-    "image_path": "data/synthetic/hard_trunc_021.png",
-    "ground_truth_path": "data/synthetic/hard_trunc_021_gt.json",
+    "name": "hard_trunc_013",
+    "image_path": "data/synthetic/hard_trunc_013.png",
+    "ground_truth_path": "data/synthetic/hard_trunc_013_gt.json",
     "difficulty": "hard",
     "n_curves": 2,
     "y_min": 0.4,
@@ -220,9 +140,9 @@
     "show_ci": true
   },
   {
-    "name": "hard_trunc_022",
-    "image_path": "data/synthetic/hard_trunc_022.png",
-    "ground_truth_path": "data/synthetic/hard_trunc_022_gt.json",
+    "name": "hard_trunc_014",
+    "image_path": "data/synthetic/hard_trunc_014.png",
+    "ground_truth_path": "data/synthetic/hard_trunc_014_gt.json",
     "difficulty": "hard",
     "n_curves": 2,
     "y_min": 0.2,
@@ -230,39 +150,9 @@
     "show_ci": true
   },
   {
-    "name": "hard_trunc_023",
-    "image_path": "data/synthetic/hard_trunc_023.png",
-    "ground_truth_path": "data/synthetic/hard_trunc_023_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.5,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_trunc_024",
-    "image_path": "data/synthetic/hard_trunc_024.png",
-    "ground_truth_path": "data/synthetic/hard_trunc_024_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.2,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_trunc_025",
-    "image_path": "data/synthetic/hard_trunc_025.png",
-    "ground_truth_path": "data/synthetic/hard_trunc_025_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.2,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_lowres_026",
-    "image_path": "data/synthetic/hard_lowres_026.png",
-    "ground_truth_path": "data/synthetic/hard_lowres_026_gt.json",
+    "name": "hard_lowres_015",
+    "image_path": "data/synthetic/hard_lowres_015.png",
+    "ground_truth_path": "data/synthetic/hard_lowres_015_gt.json",
     "difficulty": "hard",
     "n_curves": 2,
     "y_min": 0.0,
@@ -270,29 +160,9 @@
     "show_ci": false
   },
   {
-    "name": "hard_lowres_027",
-    "image_path": "data/synthetic/hard_lowres_027.png",
-    "ground_truth_path": "data/synthetic/hard_lowres_027_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 72,
-    "show_ci": false
-  },
-  {
-    "name": "hard_lowres_028",
-    "image_path": "data/synthetic/hard_lowres_028.png",
-    "ground_truth_path": "data/synthetic/hard_lowres_028_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 72,
-    "show_ci": false
-  },
-  {
-    "name": "hard_three_029",
-    "image_path": "data/synthetic/hard_three_029.png",
-    "ground_truth_path": "data/synthetic/hard_three_029_gt.json",
+    "name": "hard_three_016",
+    "image_path": "data/synthetic/hard_three_016.png",
+    "ground_truth_path": "data/synthetic/hard_three_016_gt.json",
     "difficulty": "hard",
     "n_curves": 3,
     "y_min": 0.0,
@@ -300,29 +170,9 @@
     "show_ci": false
   },
   {
-    "name": "hard_three_030",
-    "image_path": "data/synthetic/hard_three_030.png",
-    "ground_truth_path": "data/synthetic/hard_three_030_gt.json",
-    "difficulty": "hard",
-    "n_curves": 3,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": false
-  },
-  {
-    "name": "hard_three_031",
-    "image_path": "data/synthetic/hard_three_031.png",
-    "ground_truth_path": "data/synthetic/hard_three_031_gt.json",
-    "difficulty": "hard",
-    "n_curves": 3,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": false
-  },
-  {
-    "name": "hard_overlap_032",
-    "image_path": "data/synthetic/hard_overlap_032.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_032_gt.json",
+    "name": "hard_overlap_017",
+    "image_path": "data/synthetic/hard_overlap_017.png",
+    "ground_truth_path": "data/synthetic/hard_overlap_017_gt.json",
     "difficulty": "hard",
     "n_curves": 2,
     "y_min": 0.0,
@@ -330,9 +180,9 @@
     "show_ci": true
   },
   {
-    "name": "hard_overlap_033",
-    "image_path": "data/synthetic/hard_overlap_033.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_033_gt.json",
+    "name": "hard_overlap_018",
+    "image_path": "data/synthetic/hard_overlap_018.png",
+    "ground_truth_path": "data/synthetic/hard_overlap_018_gt.json",
     "difficulty": "hard",
     "n_curves": 2,
     "y_min": 0.0,
@@ -340,59 +190,9 @@
     "show_ci": true
   },
   {
-    "name": "hard_overlap_034",
-    "image_path": "data/synthetic/hard_overlap_034.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_034_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_overlap_035",
-    "image_path": "data/synthetic/hard_overlap_035.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_035_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_overlap_036",
-    "image_path": "data/synthetic/hard_overlap_036.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_036_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_overlap_037",
-    "image_path": "data/synthetic/hard_overlap_037.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_037_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_overlap_038",
-    "image_path": "data/synthetic/hard_overlap_038.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_038_gt.json",
-    "difficulty": "hard",
-    "n_curves": 2,
-    "y_min": 0.0,
-    "dpi": 150,
-    "show_ci": true
-  },
-  {
-    "name": "hard_overlap_039",
-    "image_path": "data/synthetic/hard_overlap_039.png",
-    "ground_truth_path": "data/synthetic/hard_overlap_039_gt.json",
+    "name": "hard_overlap_019",
+    "image_path": "data/synthetic/hard_overlap_019.png",
+    "ground_truth_path": "data/synthetic/hard_overlap_019_gt.json",
     "difficulty": "hard",
     "n_curves": 2,
     "y_min": 0.0,
