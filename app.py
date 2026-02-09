@@ -223,7 +223,6 @@ elif page == "Run Benchmark":
 
             if ok:
                 st.success(f"Benchmark completed in {elapsed:.1f}s")
-                st.balloons()
             else:
                 st.error("Benchmark failed. Check output above.")
 
