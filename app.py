@@ -11,6 +11,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from typing import Tuple
 
 import streamlit as st
 
@@ -70,6 +71,25 @@ def _run_command(cmd: list[str], placeholder) -> bool:
     return proc.returncode == 0
 
 
+def _delete_generated_data() -> Tuple[int, str]:
+    """Delete all synthetic data and results; keep directories and .gitkeep. Returns (files_removed, message)."""
+    import shutil
+    removed = 0
+    for dir_path in (SYNTH_DIR, RESULTS_DIR, REAL_RESULTS_DIR):
+        if not dir_path.exists():
+            continue
+        for p in dir_path.iterdir():
+            if p.name == ".gitkeep":
+                continue
+            if p.is_file():
+                p.unlink(missing_ok=True)
+                removed += 1
+            elif p.is_dir():
+                shutil.rmtree(p, ignore_errors=True)
+                removed += 1
+    return removed, f"Removed {removed} items from data/synthetic, data/results, and data/results_real_world."
+
+
 # ---------------------------------------------------------------------------
 # Sidebar
 # ---------------------------------------------------------------------------
@@ -88,19 +108,8 @@ if page == "Overview":
     st.markdown("""
     Automated extraction of survival data from Kaplan-Meier curve images
     using a **hybrid LLM + computer vision** pipeline.
-
     ---
 
-    ### Quick Start
-
-    Use the sidebar to navigate:
-
-    | Page | What it does |
-    |------|-------------|
-    | **Digitize Single Image** | Upload one KM plot and extract curves (hybrid pipeline) |
-    | **Run Benchmark** | Generate synthetic data and run the evaluation pipeline |
-    | **Synthetic Results** | View metrics, charts, and per-plot comparisons from the synthetic benchmark |
-    | **Real-World Results** | View digitization results on published clinical KM plots |
     """)
 
     col1, col2, col3 = st.columns(3)
@@ -119,6 +128,15 @@ if page == "Overview":
         if report_path.exists():
             st.subheader("Latest Synthetic Benchmark Report")
             st.code(report_path.read_text(), language="text")
+
+    st.divider()
+    with st.expander("🗑️ Delete all generated data"):
+        st.caption("Permanently remove all synthetic benchmark images, ground truth, and result files. Directories are kept. Use this to free space or start fresh.")
+        confirm = st.checkbox("I want to delete all synthetic data and results", key="delete_confirm")
+        if st.button("Delete all", type="secondary", disabled=not confirm, key="delete_btn"):
+            n_removed, msg = _delete_generated_data()
+            st.success(msg)
+            st.rerun()
 
 
 # ===================================================================
@@ -195,7 +213,7 @@ elif page == "Run Benchmark":
 
         col1, col2 = st.columns(2)
         with col1:
-            size = st.selectbox("Benchmark size", ["small (20)", "default (40)", "large (200)", "xl (500)"], index=1)
+            size = st.selectbox("Benchmark size", ["small (22)", "default (45)", "large (220)", "xl (550)"], index=1)
             size_flag = size.split(" ")[0]
         with col2:
             regen = st.checkbox("Regenerate data (delete existing)", value=False)
@@ -319,6 +337,8 @@ elif page == "Synthetic Results":
                 d = "medium"
             elif n.startswith("hard"):
                 d = "hard"
+            elif n.startswith("extreme"):
+                d = "extreme"
             else:
                 d = "other"
             if d not in all_difficulties:

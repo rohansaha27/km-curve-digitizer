@@ -107,10 +107,10 @@ def run_single_image(image_path: str, model: str, verbose: bool = True):
 
 
 BENCHMARK_SIZES = {
-    'small':   {'n_easy': 5,   'n_medium': 8,   'n_hard': 7},
-    'default': {'n_easy': 8,   'n_medium': 13,  'n_hard': 19},
-    'large':   {'n_easy': 40,  'n_medium': 80,  'n_hard': 80},
-    'xl':      {'n_easy': 100, 'n_medium': 200, 'n_hard': 200},
+    'small':   {'n_easy': 5,   'n_medium': 8,   'n_hard': 7,   'n_extreme': 2},
+    'default': {'n_easy': 8,   'n_medium': 13,  'n_hard': 19,  'n_extreme': 5},
+    'large':   {'n_easy': 40,  'n_medium': 80,  'n_hard': 80,  'n_extreme': 20},
+    'xl':      {'n_easy': 100, 'n_medium': 200, 'n_hard': 200, 'n_extreme': 50},
 }
 
 

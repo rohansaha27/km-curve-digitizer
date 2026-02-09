@@ -14,6 +14,7 @@ Supports various difficulty levels including:
 
 import json
 import numpy as np
+import cv2
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -55,7 +56,11 @@ class PlotSpec:
     figsize: Tuple[float, float] = (8, 6)
     dpi: int = 150
     title: str = ''
-    difficulty: str = 'medium'  # easy, medium, hard
+    difficulty: str = 'medium'  # easy, medium, hard, extreme
+    # Optional image degradation (applied after saving) for extreme tier
+    degrade_jpeg_quality: Optional[int] = None  # e.g. 25 for heavy compression
+    degrade_blur_sigma: Optional[float] = None  # Gaussian blur sigma in pixels
+    degrade_noise_std: Optional[float] = None   # Additive Gaussian noise std
 
 
 def generate_survival_data(
@@ -278,27 +283,64 @@ def _add_at_risk_table(ax, curve_data_list, x_max, plot_spec):
                ha='right', va='top', fontsize=8, color=color, fontweight='bold')
 
 
+def apply_image_degradation(
+    img_path: str,
+    jpeg_quality: Optional[int] = None,
+    blur_sigma: Optional[float] = None,
+    noise_std: Optional[float] = None,
+) -> None:
+    """Apply optional degradation to a saved image (in place). Used for extreme tier."""
+    if jpeg_quality is None and blur_sigma is None and noise_std is None:
+        return
+    img = cv2.imread(img_path)
+    if img is None:
+        return
+    if blur_sigma is not None and blur_sigma > 0:
+        k = max(3, int(blur_sigma * 2) | 1)  # odd kernel
+        img = cv2.GaussianBlur(img, (k, k), blur_sigma)
+    if noise_std is not None and noise_std > 0:
+        noise = np.random.default_rng().normal(0, noise_std, img.shape).astype(np.float32)
+        img = np.clip(img.astype(np.float32) + noise, 0, 255).astype(np.uint8)
+    if jpeg_quality is not None and jpeg_quality < 100:
+        _, buf = cv2.imencode('.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, jpeg_quality])
+        img = cv2.imdecode(buf, cv2.IMREAD_COLOR)
+        if img is None:
+            return
+    cv2.imwrite(img_path, img)
+
+
 def generate_benchmark_suite(
     output_dir: str,
     seed: int = 42,
     n_easy: int = 8,
     n_medium: int = 13,
     n_hard: int = 19,
+    n_extreme: int = 5,
 ) -> List[Dict]:
     """Generate a comprehensive benchmark suite of synthetic KM plots.
 
     Creates plots across multiple difficulty levels with various edge cases.
     Sizes are configurable -- use larger values for more rigorous evaluation.
 
-    Default (40 plots): n_easy=8, n_medium=13, n_hard=19
-    Large   (200 plots): n_easy=40, n_medium=80, n_hard=80
-    XL      (500 plots): n_easy=100, n_medium=200, n_hard=200
+    Default (45 plots): n_easy=8, n_medium=13, n_hard=19, n_extreme=5
+    Large   (220 plots): n_easy=40, n_medium=80, n_hard=80, n_extreme=20
+    XL      (550 plots): n_easy=100, n_medium=200, n_hard=200, n_extreme=50
 
     Returns:
         List of metadata dicts for each generated plot.
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    # Pairs of similar colors (hard for CV to separate)
+    SIMILAR_COLOR_PAIRS = [
+        ('#1f77b4', '#3d8fd6'),   # Blue vs lighter blue
+        ('#000000', '#2a2a2a'),   # Black vs dark gray
+        ('#d62728', '#e85555'),   # Red vs light red
+        ('#2ca02c', '#4cb84c'),   # Green vs light green
+        ('#9467bd', '#b088d4'),   # Purple vs light purple
+        ('#404040', '#606060'),   # Dark gray vs medium gray
+    ]
 
     ALL_COLORS = [
         '#1f77b4', '#d62728', '#2ca02c', '#ff7f0e', '#9467bd',
@@ -599,12 +641,128 @@ def generate_benchmark_suite(
         benchmark_specs.append((f'hard_overlap_{idx:03d}', spec, seed + 700 + i))
         idx += 1
 
+    # ===== EXTREME: Intentionally nasty conditions =====
+    n_ext_similar = max(1, n_extreme * 3 // 10)      # Similar colors
+    n_ext_degraded = max(1, n_extreme * 3 // 10)     # Heavy image degradation
+    n_ext_combo = max(1, n_extreme - n_ext_similar - n_ext_degraded)  # Both + more
+
+    # Two curves with very similar colors (hard to segment)
+    for i in range(n_ext_similar):
+        rng = np.random.default_rng(seed + 800 + i)
+        colors = SIMILAR_COLOR_PAIRS[i % len(SIMILAR_COLOR_PAIRS)]
+        base_median = rng.uniform(8, 36)
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Arm A',
+                    median_survival=base_median,
+                    n_subjects=rng.integers(60, 200),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[0],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.2]),
+                ),
+                CurveSpec(
+                    label='Arm B',
+                    median_survival=base_median * rng.uniform(0.5, 0.9),
+                    n_subjects=rng.integers(60, 200),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[1],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.2]),
+                ),
+            ],
+            show_censoring=True,
+            show_ci=True,
+            dpi=150,
+            difficulty='extreme',
+        )
+        benchmark_specs.append((f'extreme_similar_{idx:03d}', spec, seed + 800 + i))
+        idx += 1
+
+    # Heavy image degradation: JPEG compression + blur + noise
+    for i in range(n_ext_degraded):
+        rng = np.random.default_rng(seed + 900 + i)
+        colors = TWO_CURVE_COLORS[i % len(TWO_CURVE_COLORS)]
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Treatment',
+                    median_survival=rng.uniform(6, 36),
+                    n_subjects=rng.integers(40, 200),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[0],
+                    hazard_shape=1.0,
+                ),
+                CurveSpec(
+                    label='Control',
+                    median_survival=rng.uniform(4, 28),
+                    n_subjects=rng.integers(40, 200),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[1],
+                    hazard_shape=1.0,
+                ),
+            ],
+            show_censoring=True,
+            show_ci=bool(rng.choice([True, False])),
+            figsize=(5, 4),
+            dpi=100,
+            difficulty='extreme',
+            degrade_jpeg_quality=rng.integers(20, 40),
+            degrade_blur_sigma=rng.uniform(0.8, 1.8),
+            degrade_noise_std=rng.uniform(3, 8),
+        )
+        benchmark_specs.append((f'extreme_degraded_{idx:03d}', spec, seed + 900 + i))
+        idx += 1
+
+    # Combo: similar colors + low res + degradation
+    for i in range(n_ext_combo):
+        rng = np.random.default_rng(seed + 1000 + i)
+        colors = SIMILAR_COLOR_PAIRS[(i + 1) % len(SIMILAR_COLOR_PAIRS)]
+        y_min = rng.choice([0.0, 0.25, 0.4]) if rng.random() > 0.5 else 0.0
+        spec = PlotSpec(
+            curves=[
+                CurveSpec(
+                    label='Group 1',
+                    median_survival=rng.uniform(8, 40),
+                    n_subjects=rng.integers(50, 180),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[0],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.2]),
+                ),
+                CurveSpec(
+                    label='Group 2',
+                    median_survival=rng.uniform(6, 32) * rng.uniform(0.7, 0.95),
+                    n_subjects=rng.integers(50, 180),
+                    censoring_rate=rng.uniform(0.1, 0.35),
+                    color=colors[1],
+                    hazard_shape=rng.choice([0.8, 1.0, 1.2]),
+                ),
+            ],
+            y_min=y_min,
+            show_censoring=True,
+            show_ci=True,
+            figsize=(4, 3),
+            dpi=72,
+            difficulty='extreme',
+            degrade_jpeg_quality=rng.integers(25, 45),
+            degrade_blur_sigma=rng.uniform(0.5, 1.2),
+            degrade_noise_std=rng.uniform(2, 6),
+        )
+        benchmark_specs.append((f'extreme_combo_{idx:03d}', spec, seed + 1000 + i))
+        idx += 1
+
     # Generate all plots
     metadata = []
     for name, spec, s in benchmark_specs:
         img_path = str(output_dir / f'{name}.png')
         gt_path = str(output_dir / f'{name}_gt.json')
         gt = generate_plot(spec, img_path, gt_path, seed=s)
+        if getattr(spec, 'degrade_jpeg_quality', None) is not None or getattr(spec, 'degrade_blur_sigma', None) is not None or getattr(spec, 'degrade_noise_std', None) is not None:
+            apply_image_degradation(
+                img_path,
+                jpeg_quality=getattr(spec, 'degrade_jpeg_quality', None),
+                blur_sigma=getattr(spec, 'degrade_blur_sigma', None),
+                noise_std=getattr(spec, 'degrade_noise_std', None),
+            )
         metadata.append({
             'name': name,
             'image_path': img_path,

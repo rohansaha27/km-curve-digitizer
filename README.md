@@ -17,6 +17,7 @@ A **CV-only mode** is available without an API key (requires manual axis ranges)
 - **Easy:** single curve, full y-axis, clean (optional grid/censor marks).
 - **Medium:** two curves, full y-axis; adds confidence intervals and/or number-at-risk tables.
 - **Hard:** truncated y-axis, low resolution (DPI 72), three curves, or closely overlapping curves with CIs.
+- **Extreme:** intentionally difficult — similar-color curves (e.g. two blues), heavy image degradation (JPEG compression, blur, noise), or both combined with low res/truncated axis.
 
 | Metric | Value |
 |--------|-------|
