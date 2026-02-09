@@ -24,6 +24,10 @@ import sys
 import traceback
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')

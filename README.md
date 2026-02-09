@@ -34,8 +34,16 @@ Compared to **KM-GPT** (tested on 538 single-arm curves): our IAE is **2.4x bett
 
 ```bash
 pip install -r requirements.txt
-export ANTHROPIC_API_KEY=your_key_here  # optional, for hybrid mode
 ```
+
+**Optional — hybrid LLM+CV mode:** Copy `.env.example` to `.env` and add your Anthropic API key. The app and benchmarks load it automatically.
+
+```bash
+cp .env.example .env
+# Edit .env and set: ANTHROPIC_API_KEY=your_key_here
+```
+
+Without a key, benchmarks fall back to CV-only (with or without ground-truth hints).
 
 ## Usage
 

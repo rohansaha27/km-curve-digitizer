@@ -35,6 +35,10 @@ import time
 import traceback
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -424,7 +428,7 @@ def main():
     # Check for API key (not needed for CV-only modes)
     if not args.cv_only and not args.cv_auto and not os.environ.get('ANTHROPIC_API_KEY'):
         print("\nNo ANTHROPIC_API_KEY found. Falling back to --cv-only mode.")
-        print("Set it with: export ANTHROPIC_API_KEY=your_key_here")
+        print("Set it in .env as ANTHROPIC_API_KEY=your_key_here or export ANTHROPIC_API_KEY=your_key_here")
         print("Or use --cv-only to run with ground truth hints (no LLM needed).")
         args.cv_only = True
 
