@@ -75,7 +75,10 @@ def parse_args():
                         help='Use fully automatic CV-only mode (no LLM, no ground truth hints)')
     parser.add_argument('--size', type=str, default='default',
                         choices=['small', 'default', 'large', 'xl'],
-                        help='Benchmark size: small(20), default(40), large(200), xl(500)')
+                        help='Benchmark size: small(22), default(45), large(220), xl(550)')
+    parser.add_argument('--only-difficulty', type=str, default=None,
+                        choices=['easy', 'medium', 'hard', 'extreme'],
+                        help='Generate and run only plots of this difficulty tier')
     return parser.parse_args()
 
 
@@ -114,15 +117,21 @@ BENCHMARK_SIZES = {
 }
 
 
-def generate_benchmark(output_dir: str, seed: int, size: str = 'default'):
+def generate_benchmark(output_dir: str, seed: int, size: str = 'default', only_difficulty: str = None):
     """Generate the synthetic benchmark dataset."""
     sizes = BENCHMARK_SIZES[size]
-    total = sum(sizes.values())
-    print("\n" + "=" * 60)
-    print(f"GENERATING SYNTHETIC BENCHMARK (size={size}, {total} plots)")
-    print("=" * 60)
+    if only_difficulty:
+        total = sizes[f'n_{only_difficulty}']
+        print("\n" + "=" * 60)
+        print(f"GENERATING SYNTHETIC BENCHMARK (size={size}, {total} plots, {only_difficulty} only)")
+        print("=" * 60)
+    else:
+        total = sum(sizes.values())
+        print("\n" + "=" * 60)
+        print(f"GENERATING SYNTHETIC BENCHMARK (size={size}, {total} plots)")
+        print("=" * 60)
 
-    metadata = generate_benchmark_suite(output_dir, seed=seed, **sizes)
+    metadata = generate_benchmark_suite(output_dir, seed=seed, only_difficulty=only_difficulty, **sizes)
     print(f"\nGenerated {len(metadata)} synthetic plots in {output_dir}")
     return metadata
 
@@ -408,7 +417,7 @@ def main():
 
     # Benchmark mode
     if not args.skip_generate:
-        generate_benchmark(args.output_dir, args.seed, size=args.size)
+        generate_benchmark(args.output_dir, args.seed, size=args.size, only_difficulty=args.only_difficulty)
 
     if args.generate_only:
         print("\nBenchmark data generated. Run without --generate-only to evaluate.")

@@ -316,6 +316,7 @@ def generate_benchmark_suite(
     n_medium: int = 13,
     n_hard: int = 19,
     n_extreme: int = 5,
+    only_difficulty: Optional[str] = None,
 ) -> List[Dict]:
     """Generate a comprehensive benchmark suite of synthetic KM plots.
 
@@ -326,11 +327,27 @@ def generate_benchmark_suite(
     Large   (220 plots): n_easy=40, n_medium=80, n_hard=80, n_extreme=20
     XL      (550 plots): n_easy=100, n_medium=200, n_hard=200, n_extreme=50
 
+    If only_difficulty is 'easy', 'medium', 'hard', or 'extreme', only that
+    tier is generated (using the corresponding n_* count).
+
     Returns:
         List of metadata dicts for each generated plot.
     """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    if only_difficulty:
+        only_difficulty = only_difficulty.lower()
+        if only_difficulty == 'easy':
+            n_medium, n_hard, n_extreme = 0, 0, 0
+        elif only_difficulty == 'medium':
+            n_easy, n_hard, n_extreme = 0, 0, 0
+        elif only_difficulty == 'hard':
+            n_easy, n_medium, n_extreme = 0, 0, 0
+        elif only_difficulty == 'extreme':
+            n_easy, n_medium, n_hard = 0, 0, 0
+        else:
+            only_difficulty = None
 
     # Pairs of similar colors (hard for CV to separate)
     SIMILAR_COLOR_PAIRS = [
