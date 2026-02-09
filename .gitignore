@@ -26,9 +26,13 @@ env/
 credentials.json
 
 # Generated data: synthesizer output and benchmark results (reproducible via scripts)
-data/synthetic/
-data/results/
-data/results_real_world/
+# Ignore contents but keep folders visible (via .gitkeep)
+data/synthetic/*
+!data/synthetic/.gitkeep
+data/results/*
+!data/results/.gitkeep
+data/results_real_world/*
+!data/results_real_world/.gitkeep
 out_bench/
 out_digitized/
 
