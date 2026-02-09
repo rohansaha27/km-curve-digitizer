@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 
-from src.cv_only_digitizer import digitize_cv_only
+from .cv_only_digitizer import digitize_cv_only
 
 
 def main():

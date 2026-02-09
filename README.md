@@ -56,6 +56,7 @@ results = digitize_cv_only("plot.png", x_range=(0, 48), y_range=(0, 1))
 
 **CLI:**
 ```bash
+python -m src.digitize_single path/to/km_plot.png   # single image (CV-only, edit axis ranges in script)
 python run_benchmark.py --cv-only                    # default (40 plots)
 python run_benchmark.py --cv-only --size large        # 200 plots
 python run_real_world_benchmark.py                    # published data
@@ -66,6 +67,7 @@ python run_real_world_benchmark.py                    # published data
 ```
 src/
 ├── digitizer.py           # Hybrid LLM+CV pipeline
+├── digitize_single.py     # Single-image CLI (CV-only)
 ├── cv_only_digitizer.py   # CV-only pipeline
 ├── llm_reader.py          # Claude vision extraction
 ├── cv_extractor.py        # OpenCV curve tracing

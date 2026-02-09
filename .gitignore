@@ -25,10 +25,12 @@ env/
 .env.local
 credentials.json
 
-# Generated data (large, reproducible via scripts)
+# Generated data: synthesizer output and benchmark results (reproducible via scripts)
 data/synthetic/
 data/results/
 data/results_real_world/
+out_bench/
+out_digitized/
 
 # Keep real-world source images and annotations (small, curated)
 # !data/real_world/
