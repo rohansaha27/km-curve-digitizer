@@ -386,14 +386,19 @@ def generate_evaluation_report(
     if all_r2:
         lines.append(f"  Mean R²:              {np.mean(all_r2):.4f} (±{np.std(all_r2):.4f})")
     if all_acc3:
-        lines.append(f"  Accuracy (<3% err):   {np.mean(all_acc3)*100:.1f}%")
+        lines.append(f"  Accuracy (<3% err):   {np.mean(all_acc3)*100:.1f}% (mean of per-plot accuracies)")
     if all_acc5:
-        lines.append(f"  Accuracy (<5% err):   {np.mean(all_acc5)*100:.1f}%")
+        lines.append(f"  Accuracy (<5% err):   {np.mean(all_acc5)*100:.1f}% (mean of per-plot accuracies)")
+        lines.append(f"  Median acc@5%:        {np.median(all_acc5)*100:.1f}%")
     if all_acc10:
-        lines.append(f"  Accuracy (<10% err):  {np.mean(all_acc10)*100:.1f}%")
+        lines.append(f"  Accuracy (<10% err):  {np.mean(all_acc10)*100:.1f}% (mean of per-plot accuracies)")
     if all_median_surv_err:
         lines.append(f"  Median Surv. Error:   {np.median(all_median_surv_err):.4f} "
                       f"(mean={np.mean(all_median_surv_err):.4f})")
+    lines.append("")
+    lines.append("  Note: Overall accuracy is the mean of one value per plot (each plot counts")
+    lines.append("  equally). Easy/medium/hard plots often have high accuracy; extreme plots")
+    lines.append("  can be much lower. See DIFFICULTY breakdown below for per-tier metrics.")
     lines.append("")
 
     # KM-GPT comparison summary

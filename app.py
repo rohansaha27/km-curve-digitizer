@@ -105,12 +105,6 @@ page = st.sidebar.radio(
 # ===================================================================
 if page == "Overview":
     st.title("KM Curve Digitizer")
-    st.markdown("""
-    Automated extraction of survival data from Kaplan-Meier curve images
-    using a **hybrid LLM + computer vision** pipeline.
-    ---
-
-    """)
 
     col1, col2, col3 = st.columns(3)
     with col1:
